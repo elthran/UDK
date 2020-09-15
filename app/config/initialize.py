@@ -13,7 +13,7 @@ from app.models.counties import County
 
 
 def initialize(name):
-    app = Flask(name.split('.')[0], static_url_path="/", static_folder="dist")
+    app = Flask(name)
 
     basicConfig(level=DEBUG)
 
@@ -39,7 +39,6 @@ def load_commands(app):
 
 def load_extensions(app):
     engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
-    print(app.config["SQLALCHEMY_DATABASE_URI"])
     if not database_exists(engine.url):
         create_database(engine.url)
     db.init_app(app)
@@ -50,14 +49,11 @@ def load_hooks(app):
 
 
 def reset_database(app):
-    app.logger.info("<custom> Prior to with app_context.")
-    print("<custom> Prior to with app_context.")
     with app.app_context():
-        app.logger.info("<custom> Inside with app_context.")
-        print("<custom> Inside with app_context.")
         try:
             app.logger.info("<custom> Attempting to drop database.")
             db.drop_all()
+            app.logger.info("<custom> Database dropped successfully..")
         except SqlalchemyOperationalError as ex:
             app.logger.info("<custom> Failed to drop database.")
 
