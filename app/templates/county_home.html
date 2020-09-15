@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+{% block content %}
+
+The County object is {{ county }}
+<br>The User object is {{ user }}
+<br>
+
+
+<div id="content">
+  <h1>{{ county.name }}</h1>
+  <div id="maxWidthContainer">
+    <h2>Basic Info</h2>
+    <ul>
+      <li>Leader: {{ county.title }} {{ county.leader }}</li>
+      <li>Race: {{ county.race }}</li>
+      <li>Title: {{ county.background }}</li>
+      <li>Population: {{county.population }}</li>
+      <li>Land: {{ county.land }} acres</li>
+    </ul>
+    <br><br>
+  </div>
+</div>
+
+<br><br>
+Looking at all possible county properties:
+<ul>
+  {% for attribute in county.__dict__ %}
+  <li>{{ attribute }}</li>
+  {% endfor %}
+</ul>
+
+Looking at all possible user properties::
+<ul>
+  {% for attribute in user.__dict__ %}
+  <li>{{ attribute }}</li>
+  {% endfor %}
+</ul>
+
+
+{% endblock %}
