@@ -1,7 +1,7 @@
 from app.config import private_config
 
 DATABASE_NAME = "UDK"
-USER = "UDK_jbrunner"
+USER = "UDK_user"
 DB_PASSWORD = private_config.DB_PASSWORD
 HOST = "localhost"
 OPTIONS = "charset=utf8"

@@ -101,7 +101,7 @@ get_set_mysql_root_password() {
 
 set_mysql_user_grants() {
     mysql_db=${1//-/_} # replace - with _
-    mysql_user=${1}_${2}
+    mysql_user=${1}_user
 
     mysql_passwd=$(randpw 16)
 
@@ -112,7 +112,7 @@ set_mysql_user_grants() {
     mysql --defaults-file=$mysql_cnf -e "GRANT ALL ON ${mysql_db}_test.* TO '${mysql_user}'@'localhost' WITH GRANT OPTION;"
     build_mysql_config $game_name $mysql_passwd $mysql_user
     chmod 400 $mysql_cnf
-    echo "Added new user with access to ${game_name} tables."
+    echo "Added new user (${mysql_user}) and table (${mysql_db}) with access to ${game_name} tables."
 }
 
 
