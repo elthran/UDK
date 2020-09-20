@@ -21,15 +21,17 @@
   </div>
 </div>
 
-<br><br>
-Looking at all possible county properties:
+<h1>Image Example</h1>
+<img src="/static/images/example_image.jpeg" />
+
+<h1>Looking at all possible county properties:</h1>
 <ul>
   {% for attribute in county.__dict__ %}
   <li>{{ attribute }}</li>
   {% endfor %}
 </ul>
 
-Looking at all possible user properties::
+<h1>Looking at all possible user properties:</h1>
 <ul>
   {% for attribute in user.__dict__ %}
   <li>{{ attribute }}</li>
