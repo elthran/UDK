@@ -5,26 +5,103 @@
 <h1>The User object is {{ user }}</h1>
 <br>
 
-
-<div id="content">
-  <h1>{{ county.name }}</h1>
-  <div id="maxWidthContainer">
-    <h2>Basic Info</h2>
-    <ul>
-      <li>Leader: {{ county.title }} {{ county.leader }}</li>
-      <li>Race: {{ county.race }}</li>
-      <li>Background: {{ county.background }}</li>
-      <li>Population: {{county.population }}</li>
-      <li>Land: {{ county.land }} acres</li>
-    </ul>
-    <br><br>
-  </div>
+<div id="magic" style="float: left; display: flex; flex-direction: column;">
+<div id="container" style="float: left; display: flex; flex-direction: row; border-style: dotted; border-width: 5px;">
+    <div id="nav1" style="order: 0; border: solid 5px;">
+        <p>test navigation</p>
+    </div>
+    <div id="main-content-1" style="order: 1;">
+        <div id="content-container" style="display: flex; flex-direction: column;">
+            <div id="content-block-0" style="order: 0; border-style: solid; border-width: 3px 0px 0px 0px;">
+                <ul>
+                    <li>Leader: {{ county.title }} {{ county.leader }}</li>
+                    <li>Race: {{ county.race }}</li>
+                    <li>Background: {{ county.background }}</li>
+                    <li>Population: {{ county.population }}</li>
+                    <li>Land: {{ county.land }} acres</li>
+                </ul>
+            </div>
+            <div id="content-block-1" style="order: 0; border-style: solid; border-width: 3px 0px 0px 0px;">
+                <p>Your subjects are {% if county._happiness >= 100 %}Very Happy!{% endif %}</p>
+                <br />
+                <p> You currently have the following resources:<br />{{ county._wood }} Wood, {{ county._stone }} Stone, {{ county._iron }} Iron, and {{ county._gold }} Gold.</p>
+            </div>
+            <div id="content-block-2" style="order: 1; border-style: solid; border-width: 3px 0px 0px 0px;">
+                <p>{{ county.title }} {{ county.leader }} rules this land wisely, perhaps because his {{ county.background }}ly education. Within his {{ county.land }} acres he has {{ county.population }} loyal subjects.</p>
+            </div>
+            <div id="content-block-3" style="order: 2; border-style: solid; border-width: 3px 0px 0px 0px;">
+                <p>abcdefghijklmnopqrstuvwxyz</p>
+            </div>
+        </div>
+    </div>
 </div>
 
+<div id="container2" style="float: left; display: flex; flex-direction: row; border-style: dotted; border-width: 5px;">
+    <table style="border: 1px solid black;">
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Leader</th>
+            <th>Created</th>
+            <th>Modified</th>
+            <th>Research</th>
+            <th>Mana</th>
+        </tr>
+        <tr>
+            <td>{{ county.id }}</th>
+            <td>{{ county.user_id }}</td>
+            <td>{{ county.leader }}</td>
+            <td>{{ county.time_created }}</td>
+            <td>{{ county.time_modified }}</td>
+            <td>{{ county._research }}</td>
+            <td>{{ county._mana }}</td>
+        </tr>
+    </table>
+    <br />
+    <table style="border: 1px solid black;">
+        <tr>
+            <th>Username</th>
+            <th>Admin?</th>
+            <th>Authenticated</th>
+            <th>Active?</th>
+            <th>Created</th>
+            <th>Modified</th>
+        </tr>
+        <tr>
+            <td>{{ user.username }}</td>
+            <td>{{ user.is_admin }}</td>
+            <td>{{ user.is_authenticated }}</td>
+            <td>{{ user.time_created }}</td>
+            <td>{{ user.time_modified }}</td>
+        </tr>
+    </table>
+</div>
+
+<<<<<<< Updated upstream
 <h1>Image Example</h1>
 <img src="/static/images/example_image.jpeg" />
 
 <h1>Looking at all possible county properties:</h1>
+=======
+<div id="properties" style="order: 3;">
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<br><br>
+Looking at all possible county properties:
+>>>>>>> Stashed changes
 <ul>
   {% for attribute in county.__dict__ %}
   <li>{{ attribute }}</li>
@@ -37,6 +114,10 @@
   <li>{{ attribute }}</li>
   {% endfor %}
 </ul>
+
+</div>
+
+</div>
 
 
 {% endblock %}
