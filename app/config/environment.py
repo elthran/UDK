@@ -1,8 +1,10 @@
+import os
+
 from app.config import private_config
 
-DATABASE_NAME = "UDK"
-USER = "UDK_user"
-DB_PASSWORD = private_config.DB_PASSWORD
+DATABASE_NAME = os.environ['MYSQL_DATABASE']
+USER = os.environ['MYSQL_USER']
+DB_PASSWORD = os.environ['MYSQL_PASSWORD']
 HOST = "localhost"
 OPTIONS = "charset=utf8"
 MYSQL_BASE = "mysql+mysqldb://{user}:{password}@{host}/{dbname}?{options}"
