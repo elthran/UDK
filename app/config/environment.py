@@ -5,7 +5,7 @@ from app.config import private_config
 DATABASE_NAME = os.environ['MYSQL_DATABASE']
 USER = os.environ['MYSQL_USER']
 DB_PASSWORD = os.environ['MYSQL_PASSWORD']
-HOST = "localhost"
+HOST = "mysql"
 OPTIONS = "charset=utf8"
 MYSQL_BASE = "mysql+mysqldb://{user}:{password}@{host}/{dbname}?{options}"
 

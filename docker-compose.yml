@@ -3,7 +3,7 @@ version: '3.8'
 services:
   app:
     depends_on:
-      - db
+      - mysql
     build: .
     tty: true
     stdin_open: true
@@ -21,7 +21,7 @@ services:
         source: .
         target: /usr/src/app
 
-  db:
+  mysql:
     image: mysql:5.7
     restart: always
     env_file: .env
