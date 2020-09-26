@@ -5,7 +5,7 @@ from flask import Flask
 from logging import basicConfig, DEBUG
 
 from . import environment
-from .constants import Races, Titles, Backgrounds
+from app.helpers.constants import Races, Titles, Backgrounds
 from .database_extension import db
 from .commands import db_cli, add_auto_commit
 from app.models.users import User

@@ -1,29 +1,35 @@
+from app.helpers.functions import generate_weather
 from app.models.templates import db, GameState
+from app.helpers.constants import ProductionChoice, Rations
 
 
 class County(GameState):
+    # Basics
     name = db.Column(db.String(128), nullable=False)
     leader = db.Column(db.String(128))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     day = db.Column(db.Integer)
-
     race = db.Column(db.String(32))
     title = db.Column(db.String(16))
     background = db.Column(db.String(32))
-
+    # Economy
     _population = db.Column(db.Integer)
     _land = db.Column(db.Integer)
     _happiness = db.Column(db.Integer)  # Out of 100
     _healthiness = db.Column(db.Integer)  # Out of 100
-
     _gold = db.Column(db.Integer)
     _wood = db.Column(db.Integer)
     _iron = db.Column(db.Integer)
     _stone = db.Column(db.Integer)
     _research = db.Column(db.Integer)
     _mana = db.Column(db.Integer)
-
     grain_stores = db.Column(db.Integer)
+    # Preferences
+    _tax_rate = db.Column(db.Integer)
+    rations = db.Column(db.Float)
+    production_choice = db.Column(db.String(16))
+    # Misc
+    weather = db.Column(db.String(16))
 
     def __init__(self, name, leader, user_id, race, title, background):
         self.name = name
@@ -33,12 +39,11 @@ class County(GameState):
         self.title = title
         self.background = background
         self.day = 0
-        # Basic resources
+        # Economy
         self._population = 500
         self._land = 150
         self._healthiness = 75
         self._happiness = 100
-        # Resources
         self._gold = 750
         self._wood = 250
         self._iron = 50
@@ -46,6 +51,12 @@ class County(GameState):
         self._research = 0
         self._mana = 0
         self.grain_stores = 500
+        # Preferences
+        self._tax_rate = 7
+        self.rations = Rations.NORMAL
+        self.production_choice = ProductionChoice.OVERWORK
+        # Misc
+        self.weather = generate_weather()
 
     @property
     def population(self):
