@@ -18,12 +18,16 @@ class Building(GameState):
     output = db.Column(db.Integer)
     description = db.Column(db.String(128))
 
-    def __init__(self, infrastructure_id, infrastructure_type):
-        self.infrastructure_id = infrastructure_id
-        self.generate_building_by_type(infrastructure_type)
+    building_type = db.Column('type', db.String(50))
 
-    def generate_building_by_type(self, infrastructure_type):
-        if infrastructure_type == Buildings.HOUSE:
+    __mapper_args__ = {'polymorphic_on': building_type}
+
+    def __init__(self, building_type):
+        # self.infrastructure_id = infrastructure_id
+        self.generate_building_by_type(building_type)
+
+    def generate_building_by_type(self, building_type):
+        if building_type == Buildings.HOUSE:
             self.generic_name = Buildings.HOUSE
             self.class_name = "Cottage"
             self.total_owned = 20
@@ -33,7 +37,7 @@ class Building(GameState):
             self.stone_cost = 0
             self.output = 5
             self.description = f"Each percent of land built as a {self.class_name} increases your birth rate."
-        elif infrastructure_type == Buildings.FIELD:
+        elif building_type == Buildings.FIELD:
             self.generic_name = Buildings.FIELD
             self.class_name = "Meadow"
             self.total_owned = 10
