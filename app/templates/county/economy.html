@@ -22,8 +22,8 @@
             <td>Modifiers?</td>
             <td>
                 <ul>
-                    <li>Births: {{ county.birth_rate }}</li>
-                    <li>Immigration: {{ county.immigration_rate }}</li>
+                    <li>Births: </li>
+                    <li>Immigration: </li>
                 </ul>
             </td>
             <td>
@@ -53,8 +53,8 @@
                 </ul>
             </td>
             <!-- These conditions must not occur together or it will break the table. -->
-            {% if county._tax_rate < 7 %}<td class="green">Your current tax rate has a positive effect on happiness.</td>
-            {% elif county._tax_rate == 7 %}<td>Your current tax rate has no effect on happiness.</td>
+            {% if county.preference._tax_rate < 7 %}<td class="green">Your current tax rate has a positive effect on happiness.</td>
+            {% elif county.preference._tax_rate == 7 %}<td>Your current tax rate has no effect on happiness.</td>
             {% else %}<td class="red">Your current tax rate has a negative effect on happiness.</td>{% endif %}
         </tr>
         <tr>
@@ -145,7 +145,8 @@
     </table>
 
 
-<a href="{{ url_for('county_home') }}" style="font-size:100px">Home</a>
+<a href="{{ url_for('county_home') }}" style="font-size:100px">Home</a><br>
+<a href="{{ url_for('county_infrastructure') }}" style="font-size:100px">Infrastructure</a>
 
 
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>The County object is {{ county }}</h1>
+<h1>The User object is {{ user }}</h1>
+<br>
+
+
+<ul>
+{% for building in county.infrastructure.buildings %}
+  <li>{{ building.class_name }}: {{ building.gold_cost }} gold, {{ building.wood_cost }} wood, and {{ building.stone_cost }} stone</li>
+{% endfor %}
+</ul>
+
+
+
+<br><br><br>
+<a href="{{ url_for('county_home') }}" style="font-size:100px">Home</a><br>
+<a href="{{ url_for('county_economy') }}" style="font-size:100px">Economy</a>
+
+
+{% endblock %}

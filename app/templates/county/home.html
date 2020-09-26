@@ -14,8 +14,8 @@
       <li>Leader: {{ county.title }} {{ county.leader }}</li>
       <li>Race: {{ county.race }}</li>
       <li>Background: {{ county.background }}</li>
-      <li>Population: {{county.population }}</li>
-      <li>Land: {{ county.land }} acres</li>
+      <li>Population: {{county.economy.population }} people</li>
+      <li>Land: {{ county.economy.land }} acres</li>
     </ul>
     <br><br>
   </div>
@@ -38,7 +38,8 @@
   {% endfor %}
 </ul>
 
-<a href="{{ url_for('county_economy') }}" style="font-size:100px">Economy</a>
+<a href="{{ url_for('county_economy') }}" style="font-size:100px">Economy</a><br>
+<a href="{{ url_for('county_infrastructure') }}" style="font-size:100px">Infrastructure</a>
 
 
 {% endblock %}
