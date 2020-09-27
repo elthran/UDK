@@ -1,8 +1,0 @@
-# Call external venv
-source ~/virtual_envs/UDK/bin/activate
-
-# Inject mysql startup into environment activation
-echo 'Enter your sudo password to start mysql'
-sudo /etc/init.d/mysql start
-sudo -k
-

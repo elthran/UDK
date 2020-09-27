@@ -3,9 +3,11 @@ from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.exc import OperationalError as SqlalchemyOperationalError
 from flask import Flask
 from logging import basicConfig, DEBUG
+from time import sleep
 
-from . import environment
+
 from app.helpers.constants import Races, Titles, Backgrounds
+from . import environment
 from .database_extension import db
 from .commands import db_cli, add_auto_commit
 from app.models.users import User
@@ -18,6 +20,7 @@ def initialize(name):
     basicConfig(level=DEBUG)
 
     load_configs(app)
+    wait_for_db(app)
     load_extensions(app)
     load_commands(app)
     load_hooks(app)
@@ -29,8 +32,25 @@ def initialize(name):
 
 def load_configs(app):
     env = app.config["ENV"].title()
+    print("ENV:", env)
     config = getattr(environment, f"{env}Config")
     app.config.from_object(config)
+
+
+def wait_for_db(app):
+    """Wait for the database."""
+    wait_time_in_seconds = 10
+    for i in range(12):  # give up after 2 minutes
+        try:
+            engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
+            database_exists(engine.url)
+        except SqlalchemyOperationalError as e:
+            sleep(wait_time_in_seconds)
+            app.logger.info(f"<custom> Database connection not complete. "
+                            f"Retrying after {wait_time_in_seconds} seconds...")
+        else:
+            app.logger.info("<custom> Database connection successful.")
+            break
 
 
 def load_commands(app):

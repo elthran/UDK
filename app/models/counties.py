@@ -39,7 +39,7 @@ class County(GameState):
 
         print(f"CREATING ECONOMY/INFRASTRUCTURE/PREFERENCE WITH COUNTY ID {self.id}")
         self.economy = Economy(county_id=self.id)
-        self.infrastructure = Infrastructure(county_id=self.id)
+        self.infrastructure = Infrastructure(county_id=self.id, race=self.race)
         self.preference = Preference(county_id=self.id)
 
     def __repr__(self):
