@@ -10,18 +10,20 @@ RUN apt-get update && \
     python3-pip
 
 RUN pip3 install --upgrade pip
-
-WORKDIR /usr/src/app
-
-ADD requirements.txt .
-RUN pip3 install -r requirements.txt
+RUN pip3 install pipenv
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
+
+WORKDIR /usr/src/app
+
+ENV WORKON_HOME=tmp/udk_venv
+RUN mkdir -p tmp/udk_venv
+COPY Pipfile Pipfile.lock ./
+RUN pipenv install --deploy --ignore-pipfile
+
 ENV FLASK_APP=app/main.py
-
 EXPOSE 5000
-
-CMD ["flask", "run", "--host=0.0.0.0"]
-
 ADD . .
+
+CMD ["pipenv", "run", "flask", "run", "--host=0.0.0.0"]
