@@ -8,6 +8,10 @@ verify_ssl = true
 [packages]
 flask = "*"
 sqlalchemy = "*"
+sqlalchemy-utils = "*"
+flask-sqlalchemy = "*"
+mysqlclient = "*"
+flask-login = "*"
 
 [requires]
 python_version = "3.6"

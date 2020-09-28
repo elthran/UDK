@@ -1,6 +1,5 @@
 import os
 
-from app.config import private_config
 
 DATABASE_NAME = os.environ['MYSQL_DATABASE']
 USER = os.environ['MYSQL_USER']
