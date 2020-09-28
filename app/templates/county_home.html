@@ -1,123 +1,220 @@
 {% extends "layout.html" %}
+
+{% block style %}
+
+<!-- 1280 x 720 !-->
+
+<style>
+body {
+    background-color: rgba(220, 186, 96, 1.0);
+}
+
+div.nav-bar {
+    flex-basis: 400;
+    flex-shrink: 0;
+
+    margin: 20px;
+    padding: 10px 10px 10px 10px;
+    border: 3px solid rgba(139, 18, 59, 1);
+    border-radius: 5px;
+
+    background-color: rgba(251, 246, 224, 1);
+}
+
+a {
+    font-size: large;
+}
+
+div.content {
+    max-width: 800;
+    margin: 20px;
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 5px;
+    border-color: rgba(139, 18, 59, 1);
+    background-color: rgba(251, 246, 224, 1);
+}
+
+div.data-block {
+    flex-basis: 600px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    margin: 5px;
+    padding: 10px;
+    border: 3px solid rgba(139, 18, 59, 1);
+}
+
+a:link, visited, hover, active {
+  text-decoration: none;
+  color: rgba(4, 56, 93, 1);
+}
+
+a:visited {
+    text-decoration: none;
+    color: rgba(4, 56, 93, 1);
+}
+
+a:hover {
+    text-decoration: none;
+    color: rgba(4, 56, 93, 1);
+}
+
+a:active {
+    text-decoration: none;
+    color: rgba(4, 56, 93, 1);
+}
+
+.page {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.page table {
+    margin: 5px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column
+}
+
+.flex-container-2 {
+    display: flex;
+    flex-direction: row;
+}
+
+h3 {
+    font-size: medium;
+    font-weight: bold;
+    text-align: left;
+}
+
+</style>
+
+{% endblock %}
+
 {% block content %}
 
-<h1>The County object is {{ county }}</h1>
-<h1>The User object is {{ user }}</h1>
-<br>
+<div class="page">
+    <div name="" class="nav-bar">
+        <h3>Overview</h3>
 
-<div id="magic" style="float: left; display: flex; flex-direction: column;">
-<div id="container" style="float: left; display: flex; flex-direction: row; border-style: dotted; border-width: 5px;">
-    <div id="nav1" style="order: 0; border: solid 5px;">
-        <p>test navigation</p>
+        <table>
+            <tr><td><a href="#">County</a></td></tr>
+            <tr><td><a href="#">Kingdom</a></td></tr>
+        </table>
+
+        <h3>Advisors</h3>
+
+        <table>
+            <tr><td><a href="#">Economics</a></td></tr>
+            <tr><td><a href="#">City Planner</a></td></tr>
+            <tr><td><a href="#">War</a></td></tr>
+            <tr><td><a href="#">Thieves Guild</a></td></tr>
+            <tr><td><a href="#">Wizard Council</a></td></tr>
+            <tr><td><a href="#">Scientist</a></td></tr>
+        </table>
+        
+        <h3>Diplomacy</h3>
+
+        <table>
+            <tr><td><a href="#">Town Hall</a></td></tr>
+            <tr><td><a href="#">Messages</a></td></tr>
+            <tr><td><a href="#">Trade</a></td></tr>
+            <tr><td><a href="#">Allegiances</a></td></tr>
+        </table>
+        
+        <h3>About the Game</h3>
+
+        <table>
+            <tr><td><a href="#">Achievements</a></td></tr>
+            <tr><td><a href="#">Leaderboard</a></td></tr>
+            <tr><td><a href="#">Player Guide</a></td></tr>
+            <tr><td><a href="#">Forums</a></td></tr>
+            <tr><td><a href="#">Credits</a></td></tr>
+        </table>
     </div>
-    <div id="main-content-1" style="order: 1;">
-        <div id="content-container" style="display: flex; flex-direction: column;">
-            <div id="content-block-0" style="order: 0; border-style: solid; border-width: 3px 0px 0px 0px;">
+
+    <div class="content flex-container">
+        <div style="margin: 5px; min-width: 600; order: 1; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);">
+            <h1>The County object is {{ county }}</h1>
+            <h1>The User object is {{ user }}</h1>
+            <br>
+        </div>
+        <div style="margin: 5px; min-width: 600; order: 2; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);">
+            <table>
+                <tr>
+                    <td><img src="/static/images/example_image.jpeg" /></td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>Leader:</td>
+                                <td>{{ county.title }} {{ county.leader }}</td>
+                            </tr>
+                            <tr>
+                                <td>Race:</td>
+                                <td>{{ county.race }}</td>
+                            </tr>
+                            <tr>
+                                <td>Background:</td>
+                                <td>{{ county.background }}</td>
+                            </tr>
+                            <tr>
+                                <td>Population: </td>
+                                <td>{{ county.population }}</td>
+                            </tr>
+                            <tr>
+                                <td>Land:</td>
+                                <td>{{ county.land }} acres</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <!--
+            <ul>
+                <li>Leader: {{ county.title }} {{ county.leader }}</li>
+                <li>Race: {{ county.race }}</li>
+                <li>Background: {{ county.background }}</li>
+                <li>Population: {{ county.population }}</li>
+                <li>Land: {{ county.land }} acres</li>
+            </ul>
+            !-->
+        </div>
+        <div style="margin: 5px; min-width: 600; order: 3; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);">
+            <p>Your subjects are {% if county._happiness >= 100 %}Very Happy!{% endif %}</p>
+            <br />
+            <p> You currently have the following resources:<br />{{ county._wood }} Wood, {{ county._stone }} Stone, {{ county._iron }} Iron, and {{ county._gold }} Gold.</p>
+        </div>
+        <div style="margin: 5px; min-width: 600; order: 4; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);">
+            <p>{{ county.title }} {{ county.leader }} rules this land wisely, perhaps because his {{ county.background }}ly education. Within his {{ county.land }} acres he has {{ county.population }} loyal subjects.</p>
+        </div>
+        <div class="flex-container-2" style="order: 5">
+            <div class="data-block" style="order: 0;">
+                <p>DATA 1</p>
+                <br />
+                <h1>Looking at all possible county properties:</h1>
+
                 <ul>
-                    <li>Leader: {{ county.title }} {{ county.leader }}</li>
-                    <li>Race: {{ county.race }}</li>
-                    <li>Background: {{ county.background }}</li>
-                    <li>Population: {{ county.population }}</li>
-                    <li>Land: {{ county.land }} acres</li>
+                    {% for attribute in county.__dict__ %}
+                    <li>{{ attribute }}</li>
+                    {% endfor %}
                 </ul>
             </div>
-            <div id="content-block-1" style="order: 0; border-style: solid; border-width: 3px 0px 0px 0px;">
-                <p>Your subjects are {% if county._happiness >= 100 %}Very Happy!{% endif %}</p>
+            <div class="data-block" style="order: 1;">
+                <p>DATA 2</p>
                 <br />
-                <p> You currently have the following resources:<br />{{ county._wood }} Wood, {{ county._stone }} Stone, {{ county._iron }} Iron, and {{ county._gold }} Gold.</p>
-            </div>
-            <div id="content-block-2" style="order: 1; border-style: solid; border-width: 3px 0px 0px 0px;">
-                <p>{{ county.title }} {{ county.leader }} rules this land wisely, perhaps because his {{ county.background }}ly education. Within his {{ county.land }} acres he has {{ county.population }} loyal subjects.</p>
-            </div>
-            <div id="content-block-3" style="order: 2; border-style: solid; border-width: 3px 0px 0px 0px;">
-                <p>abcdefghijklmnopqrstuvwxyz</p>
+                <h1>Looking at all possible user properties:</h1>
+
+                <ul>
+                    {% for attribute in user.__dict__ %}
+                    <li>{{ attribute }}</li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>
 </div>
-
-<div id="container2" style="float: left; display: flex; flex-direction: row; border-style: dotted; border-width: 5px;">
-    <table style="border: 1px solid black;">
-        <tr>
-            <th>ID</th>
-            <th>User ID</th>
-            <th>Leader</th>
-            <th>Created</th>
-            <th>Modified</th>
-            <th>Research</th>
-            <th>Mana</th>
-        </tr>
-        <tr>
-            <td>{{ county.id }}</th>
-            <td>{{ county.user_id }}</td>
-            <td>{{ county.leader }}</td>
-            <td>{{ county.time_created }}</td>
-            <td>{{ county.time_modified }}</td>
-            <td>{{ county._research }}</td>
-            <td>{{ county._mana }}</td>
-        </tr>
-    </table>
-    <br />
-    <table style="border: 1px solid black;">
-        <tr>
-            <th>Username</th>
-            <th>Admin?</th>
-            <th>Authenticated</th>
-            <th>Active?</th>
-            <th>Created</th>
-            <th>Modified</th>
-        </tr>
-        <tr>
-            <td>{{ user.username }}</td>
-            <td>{{ user.is_admin }}</td>
-            <td>{{ user.is_authenticated }}</td>
-            <td>{{ user.time_created }}</td>
-            <td>{{ user.time_modified }}</td>
-        </tr>
-    </table>
-</div>
-
-<<<<<<< Updated upstream
-<h1>Image Example</h1>
-<img src="/static/images/example_image.jpeg" />
-
-<h1>Looking at all possible county properties:</h1>
-=======
-<div id="properties" style="order: 3;">
-
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-
-<br><br>
-Looking at all possible county properties:
->>>>>>> Stashed changes
-<ul>
-  {% for attribute in county.__dict__ %}
-  <li>{{ attribute }}</li>
-  {% endfor %}
-</ul>
-
-<h1>Looking at all possible user properties:</h1>
-<ul>
-  {% for attribute in user.__dict__ %}
-  <li>{{ attribute }}</li>
-  {% endfor %}
-</ul>
-
-</div>
-
-</div>
-
 
 {% endblock %}
