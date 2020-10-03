@@ -1,0 +1,62 @@
+#!/usr/bin/env bash
+# from https://github.com/proofgov/example-app-capacity-management/blob/master/bin/dev
+
+move_to_base() {
+    script_dir=$1
+    pushd ${script_dir}/.. > /dev/null
+}
+
+return_from_base () {
+    popd > /dev/null
+}
+
+app_container_id () {
+   echo $(dc_cmd ps -q app)
+}
+
+dc_cmd () {
+   docker-compose -f docker-compose.yml "$@"
+}
+
+# test () {
+#    dc_cmd run --rm test yarn test "$@"
+# }
+
+debug () {
+    echo "Awaiting binding.pry to trigger..."
+    echo "'ctrl-c' to exit"
+    (docker attach --detach-keys ctrl-c $(app_container_id))
+    exit 0
+}
+
+main () {
+    if [[ -z "$1" || "$1" == "-h" || "$1" == "--help" ]]; then
+       echo "
+dev
+  -h --help             List possible command usages.
+
+  Local Commands
+  test                  Boot the test service.
+  [some local command]  Run that command
+
+  Docker Compose Commands
+  logs -f               Ouput \`docker-compose -f docker-compose.development.yml logs -f\`
+                        Any non-local command will pipe to docker-compose
+"
+    exit 0
+    fi
+
+    SCRIPT_DIR=$(dirname $0)
+
+    move_to_base $SCRIPT_DIR
+
+    if [[ $(type -t "$1") == 'function' ]]; then
+        eval "$@"
+        exit 0
+    fi
+
+    dc_cmd "$@"
+    return_from_base
+}
+
+main "$@"

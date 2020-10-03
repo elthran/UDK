@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    depends_on:
+      - mysql
+    build: .
+    tty: true
+    stdin_open: true
+    environment: &default
+      FLASK_ENV: development
+      MYSQL_DATABASE: udk
+      # So you don't have to use root, but you can if you like
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - '5000:5000'
+    volumes:
+      - type: bind
+        source: .
+        target: /usr/src/app
+
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      <<: *default
+      MYSQL_ROOT_PASSWORD: root
+    # ports:
+    #   # <Port exposed> : < MySQL Port running inside container>
+    #   - '3306:3306'
+    # expose:
+    #   # Opens port 3306 on the container
+    #   - '3306'
+    #   # Where our data will be persisted
+    volumes:
+      - my-db:/var/lib/mysql
+
+# Names our volume
+volumes:
+  my-db:
