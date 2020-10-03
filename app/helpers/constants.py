@@ -25,7 +25,3 @@ class Rations:
     DOUBLE = 2
     TRIPLE = 3
 
-
-class Buildings:
-    HOUSE = "House"
-    FIELD = "Field"

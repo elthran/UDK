@@ -5,12 +5,16 @@
 <h1>The User object is {{ user }}</h1>
 <br>
 
+{{ county.race }}
 
 <ul>
 {% for building in county.infrastructure.buildings %}
-  <li>{{ building.class_name }}: {{ building.gold_cost }} gold, {{ building.wood_cost }} wood, and {{ building.stone_cost }} stone</li>
+  <br>
+  <li style="font-size:20px">{{ building.class_name }}. Costs: {{ building.gold_cost }} gold, {{ building.wood_cost }} wood, and {{ building.stone_cost }} stone. {{ building.description }}</li>
 {% endfor %}
 </ul>
+
+<br>Total employed workers: {{ county.infrastructure.get_employed_workers() }} people / {{ county.economy.population }}
 
 
 
