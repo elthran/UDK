@@ -9,8 +9,8 @@ module.exports = {
   //   ? '/static/dist'
   //   : '/',
   // options
-  outputDir: '../app/static/dist',
-  indexPath: '../../templates/dist/index.html',
+  outputDir: 'tmp/dist',
+  indexPath: 'ui/public/index.html',
 
   //  pages: {
   //    economy: {
