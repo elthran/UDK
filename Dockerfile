@@ -17,8 +17,6 @@ ENV LANG=C.UTF-8
 
 WORKDIR /usr/src/app
 
-ENV WORKON_HOME=tmp/udk_venv
-RUN mkdir -p tmp/udk_venv
 COPY Pipfile Pipfile.lock ./
 RUN pipenv install --deploy --ignore-pipfile
 

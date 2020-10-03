@@ -1,14 +1,12 @@
-Steps for fresh install on new PC:
-    Install dependencies one by one via.
+Steps for fresh install on new Windows PC:
 
-1. `docker-compose down -v && docker-compose build && docker-compose up -d && docker-compose logs -f app` to boot the app.
-2. In a new terminal run `dc exec app bash` to get into the app.
-3. Then hit the app in the browser at.
-   `http://localhost:5000/`
-4. `pipenv install <missing-package>`
-5. Repeat steps 3-4 until the app boots perfectly.
+1. Install docker-compose for Windows: https://docs.docker.com/docker-for-windows/install/
+2. `docker-compose down -v && docker-compose build && docker-compose up -d && docker-compose logs -f app` to boot the app.
+3. The container is running. Visit localhost:5000 to play the game.
 
-If you have previously run this docker container:
-1. `docker-compose down -v --remove-orphans`
+Steps for fresh install on Linux PC:
 
-Now you will have a minimal list of dependencies and version locking!
+1. Install docker-compose for Ubuntu: https://docs.docker.com/compose/install/
+2. `docker-compose down -v && docker-compose build && docker-compose up -d && docker-compose logs -f app` to boot the app.
+3. The container is running. Visit http://0.0.0.0:5000/ to play the game.
+
