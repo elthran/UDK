@@ -7,7 +7,6 @@ services:
     build: .
     tty: true
     stdin_open: true
-    env_file: .env
     environment: &default
       FLASK_ENV: development
       MYSQL_DATABASE: udk
@@ -24,7 +23,6 @@ services:
   mysql:
     image: mysql:5.7
     restart: always
-    env_file: .env
     environment:
       <<: *default
       MYSQL_ROOT_PASSWORD: password
