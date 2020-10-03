@@ -162,11 +162,11 @@ h3 {
                             </tr>
                             <tr>
                                 <td>Population: </td>
-                                <td>{{ county.population }}</td>
+                                <td>{{ county.economy._population }} people</td>
                             </tr>
                             <tr>
                                 <td>Land:</td>
-                                <td>{{ county.land }} acres</td>
+                                <td>{{ county.economy._land }} acres</td>
                             </tr>
                         </table>
                     </td>
@@ -185,7 +185,7 @@ h3 {
         <div style="margin: 5px; min-width: 600; order: 3; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);">
             <p>Your subjects are {% if county.economy._happiness >= 100 %}Very Happy!{% endif %}</p>
             <br />
-            <p> You currently have the following resources:<br />{{ county._wood }} Wood, {{ county._stone }} Stone, {{ county._iron }} Iron, and {{ county._gold }} Gold.</p>
+            <p> You currently have the following resources:<br />{{ county.economy._wood }} Wood, {{ county.economy._stone }} Stone, {{ county.economy._iron }} Iron, and {{ county.economy._gold }} Gold.</p>
         </div>
         <div style="margin: 5px; min-width: 600; order: 4; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);">
             <p>{{ county.title }} {{ county.leader }} rules this land wisely, perhaps because his {{ county.background }}ly education. Within his {{ county.land }} acres he has {{ county.population }} loyal subjects.</p>
@@ -194,7 +194,7 @@ h3 {
             <div class="data-block" style="order: 0;">
                 <p>DATA 1</p>
                 <br />
-                <h1>Looking at all possible county properties:</h1>
+                <h1>Looking at all possible generic county properties:</h1>
 
                 <ul>
                     {% for attribute in county.__dict__ %}
@@ -205,10 +205,10 @@ h3 {
             <div class="data-block" style="order: 1;">
                 <p>DATA 2</p>
                 <br />
-                <h1>Looking at all possible user properties:</h1>
+                <h1>Looking at all possible economy properties:</h1>
 
                 <ul>
-                    {% for attribute in user.__dict__ %}
+                    {% for attribute in county.economy.__dict__ %}
                     <li>{{ attribute }}</li>
                     {% endfor %}
                 </ul>
