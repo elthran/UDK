@@ -3,33 +3,33 @@
 ## Project setup
 
 ```
-dev build
+docker-compose build
 ```
 
 ### Compiles and hot-reloads for development
 
 ```
-dev up -d
+docker-compose up -d
 # or
-dev run --rm app yarn serve
+docker-compose run --rm app yarn serve
 ```
 
 ### Compiles and minifies for production
 
 ```
-dev run --rm app yarn build
+docker-compose run --rm app yarn build
 ```
 
 ### Run your tests
 
 ```
-dev run --rm app yarn test
+docker-compose run --rm app yarn test
 ```
 
 ### Lints and fixes files
 
 ```
-dev run --rm app yarn lint
+docker-compose run --rm app yarn lint
 ```
 
 ### Customize configuration
