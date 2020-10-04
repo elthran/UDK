@@ -1,5 +1,5 @@
 <template lang="pug">
-  #county-interface
+  #county-interface(v-if="!loading")
     div(style="margin: 5px; min-width: 600; order: 1; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);")
       h1 The County object is {{ county }}
       h1 The User object is {{ user }}
@@ -19,24 +19,24 @@
               tr
                 td Background:
                 td {{ county.background }}
-              tr
-                td Population:
-                td {{ county.economy._population }} people
-              tr
-                td Land:
-                td {{ county.economy._land }} acres
-        //- <ul>
-        //-     <li>Leader: {{ county.title }} {{ county.leader }}</li>
-        //-     <li>Race: {{ county.race }}</li>
-        //-     <li>Background: {{ county.background }}</li>
-        //-     <li>Population: {{ county.population }}</li>
-        //-     <li>Land: {{ county.land }} acres</li>
-        //- </ul>
-    div(style="margin: 5px; min-width: 600; order: 3; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);")
-      p Your subjects are {{ county.economy._happiness >= 100 ? 'Very Happy!': 'Happy' }}
-      br
-      p You currently have the following resources:
-      p {{ county.economy._wood }} Wood, {{ county.economy._stone }} Stone, {{ county.economy._iron }} Iron, and {{ county.economy._gold }} Gold.
+              //- tr
+              //-   td Population:
+              //-   td {{ county.economy._population }} people
+              //- tr
+              //-   td Land:
+              //-   td {{ county.economy._land }} acres
+      <ul>
+          <li>Leader: {{ county.title }} {{ county.leader }}</li>
+          <li>Race: {{ county.race }}</li>
+          <li>Background: {{ county.background }}</li>
+          <li>Population: {{ county.population }}</li>
+          <li>Land: {{ county.land }} acres</li>
+      </ul>
+    //- div(style="margin: 5px; min-width: 600; order: 3; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);")
+    //-   p Your subjects are {{ county.economy._happiness >= 100 ? 'Very Happy!': 'Happy' }}
+    //-   br
+    //-   p You currently have the following resources:
+    //-   p {{ county.economy._wood }} Wood, {{ county.economy._stone }} Stone, {{ county.economy._iron }} Iron, and {{ county.economy._gold }} Gold.
     div(style="margin: 5px; min-width: 600; order: 4; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);")
       p {{ county.title }} {{ county.leader }} rules this land wisely, perhaps because his {{ county.background }}ly education. Within his {{ county.land }} acres he has {{ county.population }} loyal subjects.
     div(class="flex-container-2" style="order: 5")
@@ -47,25 +47,45 @@
 
         ul(v-for="attribute in county.__dict__")
           li {{ attribute }}
-      div(class="data-block" style="order: 1;")
-        p DATA 2
-        br
-        h1 Looking at all possible economy properties:
+      //- div(class="data-block" style="order: 1;")
+      //-   p DATA 2
+      //-   br
+      //-   h1 Looking at all possible economy properties:
 
-        ul(v-for="attribute in county.economy.__dict__")
-          li {{ attribute }}
+      //-   ul(v-for="attribute in county.economy.__dict__")
+      //-     li {{ attribute }}
 
 </template>
 
 <script>
+import api from '@/api/county-api'
+
 export default {
   name: 'CountyInterface',
   components: {},
   props: {},
   data () {
-    return {}
+    return {
+      county: {},
+      user: {
+        id: 77,
+        fullName: 'Marlen',
+      },
+      loading: false,
+    }
   },
   computed: {},
+  mounted () {
+    this.loading = true
+    api
+      .fetch(1)
+      .then(county => {
+        this.county = count
+      })
+      .finally(() => {
+        this.loading = false
+      })
+  },
   methods: {},
 }
 </script>

@@ -27,13 +27,6 @@ services:
     environment:
       <<: *default
       MYSQL_ROOT_PASSWORD: root
-    # ports:
-    #   # <Port exposed> : < MySQL Port running inside container>
-    #   - '3306:3306'
-    # expose:
-    #   # Opens port 3306 on the container
-    #   - '3306'
-    #   # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
 
@@ -42,6 +35,7 @@ services:
     environment:
       <<: *default
       NODE_ENV: development
+      VUE_APP_API_HOST_URL: http://localhost:5000
     ports:
       - '8080:8080'
     volumes:
