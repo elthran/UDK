@@ -4,6 +4,7 @@ services:
   app:
     depends_on:
       - mysql
+      - ui
     build: .
     tty: true
     stdin_open: true
@@ -35,6 +36,18 @@ services:
     #   # Where our data will be persisted
     volumes:
       - my-db:/var/lib/mysql
+
+  ui:
+    build: ./ui
+    environment:
+      <<: *default
+      NODE_ENV: development
+    ports:
+      - '8080:8080'
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./ui:/usr/src/app
 
 # Names our volume
 volumes:

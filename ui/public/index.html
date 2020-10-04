@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="refresh" content="3600" />
+    <!-- vue.config.js -> public path, routes to public folder root -->
+    <link rel="shortcut icon" href="/static/dist/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="/static/dist/css/style.css" />
+    <title>Undying Kingdoms</title>
+  </head>
+  <body>
+    <noscript>
+      <strong
+        >We're sorry but this page doesn't work properly without JavaScript enabled. Please
+        enable it to continue.</strong
+      >
+    </noscript>
+    <!-- Magic lodash interpolation -->
+    <%= process.env.NODE_ENV === 'production' ? `
+    <div
+      style="height:2em;background:red;width:100%;text-align:center;line-height:2em;font-weight:bold;"
+    >
+      LOCAL VERSION OF SITE
+    </div>
+    ` : '' %>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
