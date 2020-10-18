@@ -1,26 +1,90 @@
 {% extends "layout.html" %}
+
+{% block style %}
+
+<!-- 1280 x 720 !-->
+
+ <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/stormy.css') }}">
+
+{% endblock %}
+
 {% block content %}
 
-<h1>The County object is {{ county }}</h1>
-<h1>The User object is {{ user }}</h1>
-<br>
+<div class="page">
+    <div name="" class="nav-bar">
+        <h3>Overview</h3>
 
-{{ county.race }}
+        <table>
+            <tr><td><a href="{{ url_for('county_home') }}">County</a></td></tr>
+            <tr><td><a href="#"><strike>Kingdom</strike></a></td></tr>
+        </table>
 
-<ul>
-{% for building in county.infrastructure.buildings %}
-  <br>
-  <li style="font-size:20px">{{ building.class_name }}. Costs: {{ building.gold_cost }} gold, {{ building.wood_cost }} wood, and {{ building.stone_cost }} stone. {{ building.description }}</li>
-{% endfor %}
-</ul>
+        <h3>Advisors</h3>
 
-<br>Total employed workers: {{ county.infrastructure.get_employed_workers() }} people / {{ county.economy.population }}
+        <table>
+            <tr><td><a href="{{ url_for('county_economy') }}">Economics</a></td></tr>
+            <tr><td><a href="{{ url_for('county_infrastructure') }}">City Planner</a></td></tr>
+            <tr><td><a href="#"><strike>War</strike></a></td></tr>
+            <tr><td><a href="#"><strike>Thieves Guild</strike></a></td></tr>
+            <tr><td><a href="#"><strike>Wizard Council</strike></a></td></tr>
+            <tr><td><a href="#"><strike>Scientist</strike></a></td></tr>
+        </table>
 
+        <h3>Diplomacy</h3>
 
+        <table>
+            <tr><td><a href="#"><strike>Town Hall</strike></a></td></tr>
+            <tr><td><a href="#"><strike>Messages</strike></a></td></tr>
+            <tr><td><a href="#"><strike>Trade</strike></a></td></tr>
+            <tr><td><a href="#"><strike>Allegiances</strike></a></td></tr>
+        </table>
 
-<br><br><br>
-<a href="{{ url_for('county_home') }}" style="font-size:100px">Home</a><br>
-<a href="{{ url_for('county_economy') }}" style="font-size:100px">Economy</a>
+        <h3>About the Game</h3>
 
+        <table>
+            <tr><td><a href="#"><strike>Achievements</strike></a></td></tr>
+            <tr><td><a href="#"><strike>Leaderboard</strike></a></td></tr>
+            <tr><td><a href="#"><strike>Player Guide</strike></a></td></tr>
+            <tr><td><a href="#"><strike>Forums</strike></a></td></tr>
+            <tr><td><a href="#"><strike>Credits</strike></a></td></tr>
+        </table>
+    </div>
+
+    <div class="content flex-container">
+        <div style="margin: 5px; min-width: 600; order: 0; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);">
+            <p>{{ county.name }} ({{ county.id }}), led by {{ county.title }} {{ county.leader }} [{{ county.economy._population }} people, {{ county.economy._land }} acres]</p>
+        </div>
+
+        <div style="margin: 5px; min-width: 600; order: 1; padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);">
+            <p style="font-size: 48px;">{{ county.race }}</p>
+
+            <!--
+            <ul>
+                {% for building in county.infrastructure.buildings %}
+                <br>
+                <li style="font-size:20px">{{ building.class_name }}. Costs: {{ building.gold_cost }} gold, {{ building.wood_cost }} wood, and {{ building.stone_cost }} stone. {{ building.description }}</li>
+                {% endfor %}
+            </ul>
+            !-->
+
+            <table class="infrastructure">
+                <tr>
+                    <th>Name</th>
+                    <th>Costs</th>
+                    <th>Description</th>
+                </tr>
+                {% for building in county.infrastructure.buildings %}
+                <tr>
+                    <td>{{ building.class_name }}</td>
+                    <td>{{ building.gold_cost}} gold {{ building.wood_cost }} wood {{ building.stone_cost }} stone</td>
+                    <td>{{ building.description }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+
+            <br>Total employed workers: {{ county.infrastructure.get_employed_workers() }} people / {{ county.economy.population }}
+        </div>
+    </div>
+</div>
 
 {% endblock %}
