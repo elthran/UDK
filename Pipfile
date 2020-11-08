@@ -12,6 +12,7 @@ sqlalchemy-utils = "*"
 flask-sqlalchemy = "*"
 mysqlclient = "*"
 flask-login = "*"
+flask-cors = "*"
 
 [requires]
 python_version = "3.6"
