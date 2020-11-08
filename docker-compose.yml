@@ -36,6 +36,17 @@ services:
     volumes:
       - my-db:/var/lib/mysql
 
+  client:
+    build: ./client
+    environment:
+      <<: *default
+      NODE_ENV: development
+#      VUE_APP_API_HOST_URL: http://localhost:5000
+    ports:
+      - '8080:8080'
+    volumes:
+      - ./client:/usr/src/app
+
 # Names our volume
 volumes:
   my-db:
