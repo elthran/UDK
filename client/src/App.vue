@@ -1,8 +1,12 @@
 <template>
   <div id="app">
+    <div style="height:2em;background:red;width:100%;
+    text-align:center;line-height:2em;font-weight:bold;">
+      RUNNING LOCALLY - NOT PRODUCTION
+    </div>
     <div class="page">
-      <sidebar-nav />
-      <router-view />
+      <sidebar-nav/>
+      <router-view/>
     </div>
   </div>
 </template>

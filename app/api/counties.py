@@ -17,6 +17,7 @@ def get_county(id):
         background=county.background,
         population=county.economy.population,
         healthiness=county.economy.healthiness,
+        land=county.economy.land,
         gold=county.economy.gold,
         wood=county.economy.wood,
         iron=county.economy.iron,
@@ -24,6 +25,16 @@ def get_county(id):
         mana=county.economy.mana,
         maxMana=10,
         manaChange=1,
+        buildings=[
+            dict(
+                id=building.id,
+                className=building.class_name,
+                goldCost=building.gold_cost,
+                woodCost=building.wood_cost,
+                stoneCost=building.stone_cost,
+                description=building.description,
+            ) for building in county.infrastructure.buildings],
+        employedWorkers=county.infrastructure.get_employed_workers(),
         grainStores=county.economy.grain_stores,
     )
     if county.user_id == 1:
