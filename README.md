@@ -3,7 +3,7 @@
 1. Install docker-compose 
    - for Windows: https://docs.docker.com/docker-for-windows/install/
    - for Ubuntu: https://docs.docker.com/compose/install/
-2. `docker-compose down -v && docker-compose build && docker-compose up -d && docker-compose logs -f app` to boot the app. 
+2. `docker-compose down -v && docker-compose build && docker-compose up -d && docker-compose logs -f` to boot the app. 
 > Mostly you will just use `docker-compose down && docker-compose up -d && docker compose logs -f [app|client]`
 3. Once the container is running visit http://localhost:5000/ to play the old version of the game.
 4. Visit http://localhost:8080/ for the new Vue version of the game.
