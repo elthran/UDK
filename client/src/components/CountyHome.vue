@@ -2,19 +2,12 @@
   <div v-if="!loading">
     <div class="content flex-container">
       <div
-        style="margin: 5px; min-width: 600; order: 1;
-          padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);"
-      >
-        <h1>The County object is {{ county }}</h1>
-        <br/>
-      </div>
-      <div
         style="margin: 5px; min-width: 600; order: 2;
           padding: 5px 5px 5px 5px; border: 3px solid rgba(139, 18, 59, 1);"
       >
         <table>
           <tr>
-            <td><img src="/static/images/example_image.jpeg"/></td>
+            <td><img src="@/assets/images/example_image.jpeg"/></td>
             <td>
               <table>
                 <tr>
@@ -85,10 +78,10 @@
         <div class="data-block" style="order: 0;">
           <p>DATA 1</p>
           <br/>
-          <h1>Looking at all possible generic county properties:</h1>
+          <h1>Looking at all possible preferences</h1>
 
           <pre>
-              {{ JSON.stringify(county, null, 2) }}
+              {{ JSON.stringify(county.preference, null, 2) }}
             </pre>
         </div>
         <div class="data-block" style="order: 1;">
