@@ -1,29 +1,45 @@
-# client
+# Undying Kingdoms - UI Client
 
 ## Project setup
+
 ```
-yarn install
+docker-compose build
 ```
 
 ### Compiles and hot-reloads for development
+
 ```
-yarn run serve
+docker-compose up -d
+# or
+docker-compose run --rm app yarn serve
+```
+
+### Install a New Package
+
+```
+docker-compose up -d
+# e.g.
+docker-compose exec app yarn add lodash
 ```
 
 ### Compiles and minifies for production
+
 ```
-yarn run build
+docker-compose run --rm app yarn build
 ```
 
 ### Run your tests
+
 ```
-yarn run test
+docker-compose run --rm app yarn test
 ```
 
 ### Lints and fixes files
+
 ```
-yarn run lint
+docker-compose run --rm app yarn lint
 ```
 
 ### Customize configuration
+
 See [Configuration Reference](https://cli.vuejs.org/config/).
