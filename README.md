@@ -12,3 +12,11 @@
 
 - For front-end routes see [client/src/routes.js](client/src/routes.js) e.g. http://localhost:8080/county/home
 - For back-end routes see [app/api/routes.py](app/api/routes.py) e.g. http://localhost:5000/api/counties/1
+- Install a new package
+```bash
+docker-compose up -d
+# e.g. for back-end packages
+docker-compose exec app pipenv add flask-restful
+# e.g. for front-end packages
+docker-compose exec client yarn add lodash
+```
