@@ -1,10 +1,24 @@
 <template>
   <div id="app">
-    <router-view />
+    <div class="page">
+      <sidebar-nav />
+      <router-view />
+    </div>
   </div>
 </template>
 
-<style>
+<script>
+import SidebarNav from '@/components/SidebarNav.vue';
+
+export default {
+  name: 'App',
+  components: { SidebarNav },
+  props: {},
+  computed: {},
+};
+</script>
+
+<style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -13,16 +27,13 @@
   color: #2c3e50;
 }
 
-#nav {
-  padding: 30px;
+.page {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.page table {
+  margin: 5px;
 }
 </style>

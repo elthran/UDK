@@ -1,4 +1,5 @@
 const CountyHome = () => import(/* webpackChunkName: "CountyHome" */ '@/components/CountyHome');
+const CountyEconomy = () => import(/* webpackChunkName: "CountyEconomy" */ '@/components/CountyEconomy');
 const Ping = () => import(/* webpackChunkName: "Ping" */ '@/components/Ping');
 
 export default [
@@ -11,6 +12,11 @@ export default [
     path: '/county/home',
     name: 'county.home',
     component: CountyHome,
+  },
+  {
+    path: '/county/economy',
+    name: 'county.economy',
+    component: CountyEconomy,
   },
   {
     path: '*',
