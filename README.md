@@ -17,7 +17,7 @@
 ```bash
 docker-compose up -d
 # e.g. for back-end packages
-docker-compose exec app pipenv add flask-restful
+docker-compose exec app pipenv install flask-restful
 # e.g. for front-end packages
 docker-compose exec client yarn add lodash
 ```
