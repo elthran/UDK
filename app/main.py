@@ -1,9 +1,8 @@
-from .config.initialize import initialize
 from flask import jsonify
-from flask_cors import CORS
+
+from .config.initialize import initialize
 
 app = initialize(__name__)
-CORS(app, resources={r'/*': {'origins': '*'}})
 
 @app.route('/ping', methods=['GET'])
 def ping_pong():
@@ -11,6 +10,7 @@ def ping_pong():
 
 
 def import_routes():
+    import app.api.routes
     import app.routes.home
     import app.routes.county.home
     import app.routes.county.economy

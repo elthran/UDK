@@ -2,6 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.exc import OperationalError as SqlalchemyOperationalError
 from flask import Flask
+from flask_cors import CORS
 from logging import basicConfig, DEBUG
 from time import sleep
 
@@ -58,6 +59,9 @@ def load_commands(app):
 
 
 def load_extensions(app):
+    # For development, allow separate front/back-ends.
+    CORS(app, resources={r'/*': {'origins': '*'}})
+
     engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
     if not database_exists(engine.url):
         create_database(engine.url)
