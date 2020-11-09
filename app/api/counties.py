@@ -16,6 +16,8 @@ def get_county(id):
         **basic_county_view,
         background=county.background,
         population=county.economy.population,
+        happiness=75,
+        happinessChange=2,
         healthiness=county.economy.healthiness,
         land=county.economy.land,
         gold=county.economy.gold,
@@ -36,6 +38,9 @@ def get_county(id):
             ) for building in county.infrastructure.buildings],
         employedWorkers=county.infrastructure.get_employed_workers(),
         grainStores=county.economy.grain_stores,
+        taxRate=county.preference._tax_rate,
+        rations=county.preference.rations,
+        productionChoice=county.preference.production_choice,
     )
     if county.user_id == 1:
         # Replace with current_user.id == county.user_id
