@@ -68,7 +68,8 @@
 </template>
 
 <script>
-import api from '@/api/counties-api';
+import countyApi from '@/api/counties-api';
+import userApi from '@/api/users-api';
 
 export default {
   name: 'CountyHome',
@@ -86,10 +87,10 @@ export default {
   computed: {},
   mounted() {
     this.loading = true;
-    api
-      .fetch(1)
-      .then(({ county }) => {
+    Promise.all([countyApi.fetch(1), userApi.fetch(1)])
+      .then(([{ county }, { user }]) => {
         Object.assign(this.county, county);
+        Object.assign(this.user, user);
       })
       .finally(() => {
         this.loading = false;

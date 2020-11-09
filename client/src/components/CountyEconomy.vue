@@ -28,13 +28,7 @@
             </tr>
           </table>
         </div>
-
-        <div class="data-block" style="order: 1;">
-          <p>DATA 2</p>
-          <h3>Mana: {{ county.mana }}</h3>
-        </div>
       </div>
-
       <div
         style="margin: 5px; min-width: 600; order: 2; padding: 5px 5px 5px 5px;
         border: 3px solid rgba(139, 18, 59, 1);">
