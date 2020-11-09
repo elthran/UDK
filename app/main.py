@@ -1,5 +1,6 @@
-from .config.initialize import initialize
 from flask import jsonify
+
+from .config.initialize import initialize
 
 app = initialize(__name__)
 
