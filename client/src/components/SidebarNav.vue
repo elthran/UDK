@@ -9,7 +9,9 @@
           </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Kingdom</strike></a></td>
+          <td>
+            <a href="#"><strike>Kingdom</strike></a>
+          </td>
         </tr>
       </table>
       <h3>Advisors</h3>
@@ -25,57 +27,81 @@
           </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>War</strike></a></td>
+          <td>
+            <a href="#"><strike>War</strike></a>
+          </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Thieves Guild</strike></a></td>
+          <td>
+            <a href="#"><strike>Thieves Guild</strike></a>
+          </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Wizard Council</strike></a></td>
+          <td>
+            <a href="#"><strike>Wizard Council</strike></a>
+          </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Scientist</strike></a></td>
+          <td>
+            <a href="#"><strike>Scientist</strike></a>
+          </td>
         </tr>
       </table>
       <h3>Diplomacy</h3>
       <table>
         <tr>
-          <td><a href="#"><strike>Town Hall</strike></a></td>
+          <td>
+            <a href="#"><strike>Town Hall</strike></a>
+          </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Messages</strike></a></td>
+          <td>
+            <a href="#"><strike>Messages</strike></a>
+          </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Trade</strike></a></td>
+          <td>
+            <a href="#"><strike>Trade</strike></a>
+          </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Allegiances</strike></a></td>
+          <td>
+            <a href="#"><strike>Allegiances</strike></a>
+          </td>
         </tr>
       </table>
       <h3>About the Game</h3>
       <table>
         <tr>
-          <td><a href="#"><strike>Achievements</strike></a></td>
+          <td>
+            <a href="#"><strike>Achievements</strike></a>
+          </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Leaderboard</strike></a></td>
+          <td>
+            <a href="#"><strike>Leaderboard</strike></a>
+          </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Player Guide</strike></a></td>
+          <td>
+            <a href="#"><strike>Player Guide</strike></a>
+          </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Forums</strike></a></td>
+          <td>
+            <a href="#"><strike>Forums</strike></a>
+          </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Credits</strike></a></td>
+          <td>
+            <a href="#"><strike>Credits</strike></a>
+          </td>
         </tr>
       </table>
     </nav>
   </div>
 </template>
 
-<script>
-
-</script>
+<script></script>
 
 <style scoped></style>

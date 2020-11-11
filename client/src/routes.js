@@ -1,7 +1,10 @@
-const CountyHome = () => import(/* webpackChunkName: "CountyHome" */ '@/components/CountyHome');
-const CountyEconomy = () => import(/* webpackChunkName: "CountyEconomy" */ '@/components/CountyEconomy');
-const CountyInfrastructure = () => import(/* webpackChunkName: "CountyInfrastructure" */ '@/components/CountyInfrastructure');
-const Ping = () => import(/* webpackChunkName: "Ping" */ '@/components/Ping');
+const CountyHome = () =>
+  import(/* webpackChunkName: "CountyHome" */ '@/components/CountyHome')
+const CountyEconomy = () =>
+  import(/* webpackChunkName: "CountyEconomy" */ '@/components/CountyEconomy')
+const CountyInfrastructure = () =>
+  import(/* webpackChunkName: "CountyInfrastructure" */ '@/components/CountyInfrastructure')
+const Ping = () => import(/* webpackChunkName: "Ping" */ '@/components/Ping')
 
 export default [
   {
@@ -28,4 +31,4 @@ export default [
     path: '*',
     redirect: { name: 'county.home' },
   },
-];
+]
