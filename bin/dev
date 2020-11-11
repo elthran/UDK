@@ -18,6 +18,10 @@ dc_cmd () {
    docker-compose -f docker-compose.yml "$@"
 }
 
+boot () {
+  dc_cmd up -d "$@"
+}
+
 # test () {
 #    dc_cmd run --rm test yarn test "$@"
 # }
