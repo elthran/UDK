@@ -45,6 +45,22 @@ services:
     volumes:
       - ./client:/usr/src/app
 
+  test:
+    build: .
+    command: /bin/true
+    environment:
+      <<: *default
+      FLASK_ENV: test
+      MYSQL_DATABASE: udk_test
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_password
+    tty: true
+    stdin_open: true
+    depends_on:
+      - mysql
+    volumes:
+      - .:/usr/src/app
+
 # Names our volume
 volumes:
   db-data:
