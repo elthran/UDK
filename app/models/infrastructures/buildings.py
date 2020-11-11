@@ -8,8 +8,9 @@ class Building(GameState):
     infrastructure_id = db.Column(db.Integer, db.ForeignKey('infrastructure.id'), nullable=False)
     infrastructure = relationship("Infrastructure", back_populates="buildings")
 
-    building_type = db.Column(db.String(128))
-    class_name = db.Column(db.String(128))
+    building_type = db.Column(db.String(16))
+    class_name = db.Column(db.String(16))
+    class_name_plural = db.Column(db.String(16))
     total_owned = db.Column(db.Integer)
     worker_capacity = db.Column(db.Integer)
     gold_cost = db.Column(db.Integer)

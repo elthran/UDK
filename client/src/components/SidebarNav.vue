@@ -69,6 +69,9 @@
         <tr>
           <td><a href="#"><strike>Credits</strike></a></td>
         </tr>
+        <tr>
+          <td><router-link :to="{ name: 'debug' }">Debug/Admin</router-link></td>
+        </tr>
       </table>
     </nav>
   </div>

@@ -1,3 +1,5 @@
+import DebugAdmin from "@/components/DebugAdmin";
+
 const CountyHome = () => import(/* webpackChunkName: "CountyHome" */ '@/components/CountyHome');
 const CountyEconomy = () => import(/* webpackChunkName: "CountyEconomy" */ '@/components/CountyEconomy');
 const CountyInfrastructure = () => import(/* webpackChunkName: "CountyInfrastructure" */ '@/components/CountyInfrastructure');
@@ -23,6 +25,11 @@ export default [
     path: '/county/infrastructure',
     name: 'county.infrastructure',
     component: CountyInfrastructure,
+  },
+  {
+    path: '/debug',
+    name: 'debug',
+    component: DebugAdmin,
   },
   {
     path: '*',

@@ -45,3 +45,54 @@ class Buildings:
                     "Output": 60,
                     "Description": "Produces enough food to feed {0} people a day, but excess dairy is lost each day."},
     }
+
+
+class Units:
+
+    UNARMOURED = "Unarmoured"
+    LEATHER = "Leather"
+    PLATE = "Plate"
+
+    INFANTRY = "Infantry"
+    CAVALRY = "Cavalry"
+    SIEGE = "Siege"
+    MONSTER = "Monster"
+
+    Human = {
+        "Peasant": {"Singular": "Man-at-arms",
+                    "Plural": "Men-at-arms",
+                    "Gold": 25,
+                    "Wood": 5,
+                    "Iron": 5,
+                    "Upkeep": 5,
+                    "Attack": 1,
+                    "Defence": 1,
+                    "Health": 1,
+                    "Category": INFANTRY,
+                    "Armour": UNARMOURED,
+                    "Description": "Men-at-arms can be trained extremely quickly and have low upkeep."},
+        "Soldier": {"Singular": "Footman",
+                    "Plural": "Footmen",
+                    "Gold": 50,
+                    "Wood": 5,
+                    "Iron": 15,
+                    "Upkeep": 20,
+                    "Attack": 4,
+                    "Defence": 2,
+                    "Health": 3,
+                    "Category": INFANTRY,
+                    "Armour": LEATHER,
+                    "Description": "Footmen are strong attackers."},
+        "Archer": {"Singular": "Musketeer",
+                    "Plural": "Musketeers",
+                    "Gold": 50,
+                    "Wood": 5,
+                    "Iron": 15,
+                    "Upkeep": 20,
+                    "Attack": 2,
+                    "Defence": 4,
+                    "Health": 3,
+                    "Category": INFANTRY,
+                    "Armour": UNARMOURED,
+                    "Description": "Musketeers are excellent at defending."},
+    }
