@@ -16,9 +16,7 @@ services:
     ports:
       - '5000:5000'
     volumes:
-      - type: bind
-        source: .
-        target: /usr/src/app
+      - .:/usr/src/app
 
   mysql:
     image: mysql:5.7
@@ -34,7 +32,7 @@ services:
     #   - '3306'
     #   # Where our data will be persisted
     volumes:
-      - my-db:/var/lib/mysql
+      - db-data:/var/lib/mysql
 
   client:
     build: ./client
@@ -49,4 +47,4 @@ services:
 
 # Names our volume
 volumes:
-  my-db:
+  db-data:
