@@ -6,9 +6,8 @@ services:
     environment: &default
       FLASK_ENV: development
       MYSQL_DATABASE: udk
-      # So you don't have to use root, but you can if you like
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
     tty: true
     stdin_open: true
     depends_on:
@@ -23,7 +22,6 @@ services:
     restart: unless-stopped
     environment:
       <<: *default
-      MYSQL_ROOT_PASSWORD: root
     # ports:
     #   # <Port exposed> : < MySQL Port running inside container>
     #   - '3306:3306'
@@ -52,8 +50,6 @@ services:
       <<: *default
       FLASK_ENV: test
       MYSQL_DATABASE: udk_test
-      MYSQL_USER: test_user
-      MYSQL_PASSWORD: test_password
     tty: true
     stdin_open: true
     depends_on:

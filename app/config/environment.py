@@ -3,7 +3,7 @@ import os
 
 DATABASE_NAME = os.environ['MYSQL_DATABASE']
 USER = os.environ['MYSQL_USER']
-DB_PASSWORD = os.environ['MYSQL_PASSWORD']
+DB_PASSWORD = os.environ['MYSQL_ROOT_PASSWORD']
 HOST = "mysql"
 OPTIONS = "charset=utf8"
 MYSQL_BASE = "mysql+mysqldb://{user}:{password}@{host}/{dbname}?{options}"
