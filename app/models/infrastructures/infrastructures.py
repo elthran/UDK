@@ -13,13 +13,11 @@ class Infrastructure(GameState):
     def __init__(self, county_id, race):
         self.county_id = county_id
 
-        self.buildings.append(Building(building_type="House", race=race))
-        self.buildings.append(Building(building_type="Field", race=race))
-        self.buildings.append(Building(building_type="Pasture", race=race))
+        self.house = Building(building_type="House", race=race)
+        self.field = Building(building_type="Field", race=race)
+        self.pasture = Building(building_type="Pasture", race=race)
 
-        # self.house = Building(building_type="House", race=race)
-        # self.field = Building(building_type="Field", race=race)
-        # self.pasture = Building(building_type="Pasture", race=race)
+        self.buildings = [self.house, self.field, self.pasture]
 
     def get_employed_workers(self):
         total = 0

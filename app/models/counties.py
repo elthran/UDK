@@ -2,6 +2,7 @@ from sqlalchemy.orm import relationship
 
 from app.models.economies import Economy
 from app.models.infrastructures.infrastructures import Infrastructure
+from app.models.militaries.militaries import Military
 from app.models.preferences import Preference
 from app.models.templates import db, GameState
 from app.helpers.functions import generate_weather
@@ -13,14 +14,15 @@ class County(GameState):
     leader = db.Column(db.String(128))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     day = db.Column(db.Integer)
-    race = db.Column(db.String(32))
+    race = db.Column(db.String(16))
     title = db.Column(db.String(16))
-    background = db.Column(db.String(32))
+    background = db.Column(db.String(16))
     # Misc
     weather = db.Column(db.String(16))
 
     economy = relationship("Economy", uselist=False, back_populates="county")
     infrastructure = relationship("Infrastructure", uselist=False, back_populates="county")
+    military = relationship("Military", uselist=False, back_populates="county")
     preference = relationship("Preference", uselist=False, back_populates="county")
 
     def __init__(self, name, leader, user_id, race, title, background):
@@ -40,6 +42,7 @@ class County(GameState):
         print(f"CREATING ECONOMY/INFRASTRUCTURE/PREFERENCE WITH COUNTY ID {self.id}")
         self.economy = Economy(county_id=self.id)
         self.infrastructure = Infrastructure(county_id=self.id, race=self.race)
+        self.military = Military(county_id=self.id, race=self.race)
         self.preference = Preference(county_id=self.id)
 
     def __repr__(self):
