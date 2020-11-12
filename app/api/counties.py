@@ -15,6 +15,7 @@ def get_county(id):
     full_county_view = dict(
         **basic_county_view,
         name=county.name,
+        day=county.day,
         background=county.background,
         population=county.economy.population,
         defensivePower=county.military.defensive_power(),

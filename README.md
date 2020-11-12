@@ -21,3 +21,8 @@ docker-compose exec app pipenv install flask-restful
 # e.g. for front-end packages
 docker-compose exec client yarn add lodash
 ```
+
+Basic Debug Commands:
+Advance day (take your turn): http://localhost:5000/debug/advance_day
+Buy Soldier: http://localhost:5000/debug/buy_footman
+Buy Archer: http://localhost:5000/debug/buy_archer

@@ -17,6 +17,10 @@
               <td>{{ county.title }} {{ county.leader }}</td>
             </tr>
             <tr>
+              <td>Day:</td>
+              <td>{{ county.day }}</td>
+            </tr>
+            <tr>
               <td>Race:</td>
               <td>{{ county.race }}</td>
             </tr>
@@ -64,7 +68,15 @@
         </div>
       </div>
     </div>
+
+    <div>
+      <ul>
+        <li><buton><a href="http://localhost:5000/debug/advance_day">Advance Day</a></buton></li>
+        <li><buton><a href="http://localhost:5000/debug/buy_footman">Buy Footman</a></buton></li>
+        <li><buton><a href="http://localhost:5000/debug/buy_archer">Buy Archer</a></buton></li>
+      </ul>
     </div>
+  </div>
 </template>
 
 <script>
