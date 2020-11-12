@@ -13,7 +13,7 @@ class County(GameState):
     name = db.Column(db.String(128), nullable=False)
     leader = db.Column(db.String(128))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    day = db.Column(db.Integer)
+    kingdom_id = db.Column(db.Integer, db.ForeignKey('kingdom.id'), nullable=False)
     race = db.Column(db.String(16))
     title = db.Column(db.String(16))
     background = db.Column(db.String(16))
@@ -25,14 +25,14 @@ class County(GameState):
     military = relationship("Military", uselist=False, back_populates="county")
     preference = relationship("Preference", uselist=False, back_populates="county")
 
-    def __init__(self, name, leader, user_id, race, title, background):
+    def __init__(self, kingdom_id, name, leader, user_id, race, title, background):
+        self.kingdom_id = kingdom_id
         self.name = name
         self.leader = leader
         self.user_id = user_id
         self.race = race
         self.title = title
         self.background = background
-        self.day = 0
 
         # Misc
         self.weather = generate_weather()
@@ -45,5 +45,12 @@ class County(GameState):
         self.military = Military(county_id=self.id, race=self.race)
         self.preference = Preference(county_id=self.id)
 
-    def __repr__(self):
-        return f"<County: (Name: {self.name}, ID: {self.id})>"
+    @property
+    def day(self):
+        return self.kingdom.world.day
+
+    def advance_day(self):
+        self.economy.gold += 25
+        self.economy.wood += 25
+        self.economy.iron += 25
+        self.economy.stone += 5

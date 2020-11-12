@@ -8,6 +8,7 @@ class Building(GameState):
     infrastructure_id = db.Column(db.Integer, db.ForeignKey('infrastructure.id'), nullable=False)
     infrastructure = relationship("Infrastructure", back_populates="buildings")
 
+    building_type = db.Column(db.String(16))
     class_name = db.Column(db.String(16))
     class_name_plural = db.Column(db.String(16))
     total_owned = db.Column(db.Integer)
@@ -19,7 +20,7 @@ class Building(GameState):
     description = db.Column(db.String(128))
 
     def __init__(self, building_type, race):
-        self.generic_name = building_type
+        self.building_type = building_type
         racial_metadata = getattr(Buildings, race)[building_type]
         self.class_name = racial_metadata["Singular"]
         self.class_name_plural = racial_metadata["Plural"]

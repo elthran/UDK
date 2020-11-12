@@ -21,5 +21,3 @@ class User(GameState):
         self.is_active = True
         self.is_anonymous = False
 
-    def __repr__(self):
-        return f"<User: (Usename: {self.username}, ID: {self.id})>"
