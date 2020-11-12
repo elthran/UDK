@@ -26,6 +26,10 @@ test () {
    dc_cmd run --rm test pipenv run pytest tests/ "$@"
 }
 
+python () {
+  dc_cmd run --rm test pipenv run python
+}
+
 debug () {
     echo "Awaiting binding.pry to trigger..."
     echo "'ctrl-c' to exit"
