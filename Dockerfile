@@ -18,7 +18,7 @@ ENV LANG=C.UTF-8
 WORKDIR /usr/src/app
 
 COPY Pipfile Pipfile.lock ./
-RUN pipenv install --deploy --ignore-pipfile
+RUN pipenv install --dev --deploy --ignore-pipfile
 
 ENV FLASK_APP=app/main.py
 EXPOSE 5000

@@ -22,9 +22,9 @@ boot () {
   dc_cmd up -d "$@"
 }
 
-# test () {
-#    dc_cmd run --rm test yarn test "$@"
-# }
+test () {
+   dc_cmd run --rm test pipenv run pytest tests/ "$@"
+}
 
 debug () {
     echo "Awaiting binding.pry to trigger..."
