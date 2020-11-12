@@ -1,11 +1,8 @@
 <template>
   <div v-if="!loading">
-    <button>Buy 10 archers</button>
-    <button>Buy 10 footmen</button>
-    <button>Gain 200 gold</button>
-    <button>Gain 200 iron</button>
-    <button>Gain 200 stone</button>
-    <button>Gain 200 wood</button>
+    <button><a href="/temp/admin/advance_day">Advance Day</a></button>
+    <button><a href="/temp/admin/buy_footman">Buy 1 footman</a></button>
+    <button><a href="/temp/admin/buy_archer">Buy 1 archer</a></button>
     <div class="content flex-container">
       <div class="flex-container-2" style="order: 3">
         <div class="data-block" style="order: 0;">

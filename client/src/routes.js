@@ -1,9 +1,9 @@
-import DebugAdmin from "@/components/DebugAdmin";
-
 const CountyHome = () => import(/* webpackChunkName: "CountyHome" */ '@/components/CountyHome');
 const CountyEconomy = () => import(/* webpackChunkName: "CountyEconomy" */ '@/components/CountyEconomy');
 const CountyInfrastructure = () => import(/* webpackChunkName: "CountyInfrastructure" */ '@/components/CountyInfrastructure');
 const Ping = () => import(/* webpackChunkName: "Ping" */ '@/components/Ping');
+const DebugAdmin = () => import(/* webpackChunkName: "DebugAdmin" */ '@/components/Debug');
+
 
 export default [
   {

@@ -1,3 +1,5 @@
+from random import randint
+
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.exc import OperationalError as SqlalchemyOperationalError
@@ -93,5 +95,8 @@ def reset_database(app):
                         title=Titles.SIR,
                         background=Backgrounds.PRIEST)
         county.save()
+
+        county.military.archer.total_owned = randint(1,25)
+        county.military.soldier.total_owned = randint(1,25)
 
         db.session.commit()

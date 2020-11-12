@@ -8,7 +8,6 @@ class Unit(GameState):
     military_id = db.Column(db.Integer, db.ForeignKey('military.id'), nullable=False)
     military = relationship("Military", back_populates="units")
 
-    unit_type = db.Column(db.String(16))
     class_name = db.Column(db.String(16))
     class_name_plural = db.Column(db.String(16))
     total_owned = db.Column(db.Integer)

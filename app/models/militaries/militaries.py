@@ -13,9 +13,11 @@ class Military(GameState):
     def __init__(self, county_id, race):
         self.county_id = county_id
 
-        self.units.append(Unit(unit_type="Peasant", race=race))
-        self.units.append(Unit(unit_type="Soldier", race=race))
-        self.units.append(Unit(unit_type="Archer", race=race))
+        self.peasant = Unit(unit_type="Peasant", race=race)
+        self.soldier = Unit(unit_type="Soldier", race=race)
+        self.archer = Unit(unit_type="Archer", race=race)
+
+        self.units = [self.peasant, self.soldier, self.archer]
 
     def offensive_power(self):
         power = 0
