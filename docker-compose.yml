@@ -3,6 +3,7 @@ version: '3.8'
 services:
   app:
     build: .
+    image: udk/app:development
     environment: &default
       FLASK_ENV: development
       MYSQL_DATABASE: udk
@@ -34,6 +35,7 @@ services:
 
   client:
     build: ./client
+    image: udk/client:development
     environment:
       <<: *default
       NODE_ENV: development
@@ -44,7 +46,7 @@ services:
       - ./client:/usr/src/app
 
   test:
-    build: .
+    image: udk/app:development
     command: /bin/true
     environment:
       <<: *default
