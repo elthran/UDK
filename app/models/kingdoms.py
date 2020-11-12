@@ -16,6 +16,3 @@ class Kingdom(GameState):
         for county in self.counties:
             county.advance_day()
 
-    def __repr__(self):
-        return '<Kingdom %r (%r)>' % (self.name, self.id)
-

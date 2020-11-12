@@ -54,6 +54,3 @@ class County(GameState):
         self.economy.wood += 25
         self.economy.iron += 25
         self.economy.stone += 5
-
-    def __repr__(self):
-        return f"<County: (Name: {self.name}, ID: {self.id})>"

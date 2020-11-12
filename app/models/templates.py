@@ -48,6 +48,9 @@ class GameState(Template):
     time_created = db.Column(db.DateTime, default=datetime.utcnow)
     time_modified = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
 
+    def __repr__(self):
+        return '<Class Name: %r and ID: %r>' % (self.__class_.__name__, self.id)
+
 
 class GameEvent(Template):
     __abstract__ = True

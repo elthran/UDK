@@ -1,5 +1,3 @@
-from random import randint
-
 from sqlalchemy import create_engine
 from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.exc import OperationalError as SqlalchemyOperationalError
@@ -9,14 +7,15 @@ from logging import basicConfig, DEBUG
 from time import sleep
 
 
-from app.helpers.constants import Races, Titles, Backgrounds
 from . import environment
 from .database_extension import db
 from .commands import db_cli, add_auto_commit
+
 from app.models.users import User
+from app.models.worlds import World
 from app.models.counties import County
-from ..models.kingdoms import Kingdom
-from ..models.worlds import World
+from app.models.kingdoms import Kingdom
+from app.helpers.constants import Races, Titles, Backgrounds
 
 
 def initialize(name):
