@@ -1,5 +1,5 @@
 from flask import jsonify, redirect
-from flask_login import login_user
+from flask_login import login_user, current_user
 
 from .config.initialize import initialize
 from .models.users import User
@@ -60,10 +60,8 @@ def user_creation(username):
                             title="Lady",
                             background="Warlord")
         new_county.save()
-    else:
-        new_user = User(username="BFGFD")
-        new_user.save()
-    return redirect('http://localhost:8080/county/home')
+        return jsonify(f"User {new_user.id} id created.")
+    return jsonify(f"User already exists with that username and id {user.id}")
 
 
 @app.route('/user/login/<string:username>', methods=['GET', 'POST'])
@@ -71,7 +69,21 @@ def user_login(username):
     user = User.query.filter_by(username=username).first()
     if user:
         login_user(user)
-    return redirect('http://localhost:8080/county/home')
+    return jsonify(f"Logged in as {current_user}")
+
+
+@app.route('/user/verify_login', methods=['GET', 'POST'])
+def verify_login():
+    return jsonify(f"Logged in as {current_user}. Authenticated: {current_user.is_authenticated}")
+
+
+@app.route('/get_all', methods=['GET', 'POST'])
+def get_all():
+    counties = County.query.all()
+    return jsonify(
+        counties=[dict(id=county.id,
+                       name=county.name,) for county in counties]
+    )
 
 
 def import_routes():
