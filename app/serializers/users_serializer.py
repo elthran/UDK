@@ -1,7 +1,5 @@
-from app.serializers.base_serializer import BaseSerializer
+from app.serializers.base_serializer import BaseSerializer, fields
 
 
 class UsersSerializer(BaseSerializer):
-    identifier = "id"
-
-    fields = ["username"]
+    _fields = fields("id", "username")
