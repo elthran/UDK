@@ -21,3 +21,6 @@ class User(GameState):
         self.is_active = True
         self.is_anonymous = False
 
+    def get_id(self):
+        # Required for flask-login
+        return self.id

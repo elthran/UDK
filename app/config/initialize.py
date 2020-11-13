@@ -3,6 +3,7 @@ from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.exc import OperationalError as SqlalchemyOperationalError
 from flask import Flask
 from flask_cors import CORS
+from flask_login import LoginManager
 from logging import basicConfig, DEBUG
 from time import sleep
 
@@ -29,6 +30,11 @@ def initialize(name):
     load_extensions(app)
     load_commands(app)
     load_hooks(app)
+
+    # @klondikemarlen put this in a better place and make it better
+    app.config['SECRET_KEY'] = "flask-login"
+
+    load_login_manager(app)
 
     reset_database(app)
 
@@ -74,6 +80,18 @@ def load_extensions(app):
 
 def load_hooks(app):
     add_auto_commit(app, db)
+
+
+def load_login_manager(app):
+    login_manager = LoginManager()
+    login_manager.init_app(app)
+    login_manager.login_view = 'login'
+
+    # This can't be the correct place for this decorator?
+
+    @login_manager.user_loader
+    def load_user(id_):
+        return User.query.get(id_)
 
 
 def reset_database(app):

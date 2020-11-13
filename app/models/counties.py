@@ -13,6 +13,7 @@ class County(GameState):
     name = db.Column(db.String(128), nullable=False)
     leader = db.Column(db.String(128))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship('User', backref='county')
     kingdom_id = db.Column(db.Integer, db.ForeignKey('kingdom.id'), nullable=False)
     race = db.Column(db.String(16))
     title = db.Column(db.String(16))

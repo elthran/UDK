@@ -71,9 +71,9 @@
 
     <div>
       <ul>
-        <li><buton><a href="http://localhost:5000/debug/advance_day">Advance Day</a></buton></li>
-        <li><buton><a href="http://localhost:5000/debug/buy_footman">Buy Footman</a></buton></li>
-        <li><buton><a href="http://localhost:5000/debug/buy_archer">Buy Archer</a></buton></li>
+        <li><button><a href="http://localhost:5000/debug/advance_day">Advance Day</a></button></li>
+        <li><button><a href="http://localhost:5000/debug/buy_footman">Buy Footman</a></button></li>
+        <li><button><a href="http://localhost:5000/debug/buy_archer">Buy Archer</a></button></li>
       </ul>
     </div>
   </div>

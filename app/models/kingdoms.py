@@ -1,5 +1,3 @@
-from sqlalchemy.orm import relationship
-
 from app.models.templates import db, GameState
 
 
