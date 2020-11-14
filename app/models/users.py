@@ -12,6 +12,9 @@ class User(GameState):
     is_admin = db.Column(db.Boolean)  # Current user is a game creator with unlimited power
     is_bot = db.Column(db.Boolean)  # Current user is a game creator with unlimited power
 
+    county = db.relationship('County', back_populates='user', uselist=False)
+
+
     def __init__(self, username):
         # Basic data
         self.username = username
