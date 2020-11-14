@@ -14,11 +14,12 @@ RUN pip3 install pipenv
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
+ENV PYTHONPATH /usr/src/app
 
 WORKDIR /usr/src/app
 
 COPY Pipfile Pipfile.lock ./
-RUN pipenv install --deploy --ignore-pipfile
+RUN pipenv install --dev --deploy --ignore-pipfile
 
 ENV FLASK_APP=app/main.py
 EXPOSE 5000

@@ -3,7 +3,7 @@ import os
 
 DATABASE_NAME = os.environ['MYSQL_DATABASE']
 USER = os.environ['MYSQL_USER']
-DB_PASSWORD = os.environ['MYSQL_PASSWORD']
+DB_PASSWORD = os.environ['MYSQL_ROOT_PASSWORD']
 HOST = "mysql"
 OPTIONS = "charset=utf8"
 MYSQL_BASE = "mysql+mysqldb://{user}:{password}@{host}/{dbname}?{options}"
@@ -17,12 +17,14 @@ class BaseConfig:
     THREADS_PER_PAGE = 2
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+    SQLALCHEMY_ENGINE_OPTIONS = {}
     # I don't know what these do but we might need them at some point.
     # from server show global variables like '%connections%';
-    SQLALCHEMY_POOL_SIZE = 5000
-    SQLALCHEMY_POOL_RECYCLE = 30 * 60  # 30 minutes, sounded reasonable?
+    SQLALCHEMY_ENGINE_OPTIONS['pool_size'] = 5000
+    SQLALCHEMY_ENGINE_OPTIONS['pool_recycle'] = 30 * 60 # 30 minutes, sounded reasonable?
     # sounded reasonable, maybe should be same as SQLALCHEMY_POOL_RECYCLE
-    SQLALCHEMY_POOL_TIMEOUT = 30
+    SQLALCHEMY_ENGINE_OPTIONS['pool_timeout'] = 30
+
     SQLALCHEMY_DATABASE_URI = MYSQL_BASE.format(user=USER,
                                                 password=DB_PASSWORD,
                                                 host=HOST,
