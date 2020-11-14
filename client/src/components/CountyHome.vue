@@ -81,7 +81,7 @@
 
 <script>
 import countyApi from '@/api/counties-api';
-import userApi from '@/api/users-api';
+import systemApi from '@/api/system-api';
 
 export default {
   name: 'CountyHome',
@@ -99,19 +99,22 @@ export default {
   computed: {},
   mounted() {
     this.loading = true;
-    Promise.all([countyApi.fetch(1), userApi.fetch(1)])
-      .then(([{ county }, { user }]) => {
+    systemApi.currentUser().then(({ user }) => {
+      if (!user.id) {
+        this.$router.push('/session/login')
+        return
+      }
+
+      Object.assign(this.user, user);
+      return countyApi.fetch(user.countyId).then(({ county }) => {
         Object.assign(this.county, county);
-        Object.assign(this.user, user);
       })
-      .finally(() => {
-        this.loading = false;
-      });
+    })
+    .finally(() => {
+      this.loading = false;
+    });
   },
   methods: {
-    urlFor(name) {
-      return `/${name}`;
-    },
   },
 };
 </script>

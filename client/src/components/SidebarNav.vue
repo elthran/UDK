@@ -75,7 +75,14 @@
 </template>
 
 <script>
-
+export default {
+  name: 'SidebarNav',
+  data () {
+    return {
+      loading: false,
+    }
+  }
+}
 </script>
 
 <style scoped></style>
