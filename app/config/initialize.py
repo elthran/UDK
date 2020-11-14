@@ -3,7 +3,6 @@ from sqlalchemy_utils import database_exists, create_database
 from sqlalchemy.exc import OperationalError as SqlalchemyOperationalError
 from flask import Flask
 from flask_cors import CORS
-from flask_login import LoginManager
 from logging import basicConfig, DEBUG
 from time import sleep
 
@@ -12,6 +11,7 @@ from . import environment
 from .database_extension import db
 from .commands import db_cli
 from app.config.hooks import add_auto_commit
+from app.config.initializers.flask_login import login_manager
 
 from app.models.users import User
 from app.models.worlds import World
@@ -72,6 +72,8 @@ def load_extensions(app):
     # For development, allow separate front/back-ends.
     CORS(app, resources={r'/*': {'origins': '*'}})
 
+    login_manager.init_app(app)
+
     engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
     if not database_exists(engine.url):
         create_database(engine.url)
@@ -80,19 +82,6 @@ def load_extensions(app):
 
 def load_hooks(app):
     add_auto_commit(app, db)
-
-
-def load_login_manager(app):
-    login_manager = LoginManager()
-    login_manager.init_app(app)
-    login_manager.login_view = 'login'
-
-    # FIXME: @klondikemarlen
-    # This can't be the correct place for this decorator?
-
-    @login_manager.user_loader
-    def load_user(id_):
-        return User.query.get(id_)
 
 
 def reset_database(app):
