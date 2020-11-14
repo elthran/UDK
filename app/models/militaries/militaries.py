@@ -10,6 +10,11 @@ class Military(GameState):
 
     units = relationship("Unit", back_populates="military")
 
+    # FIXME: @klondikemarlen
+    # peasant = relationship?
+    # soldier = relationship?
+    # archer = relationship?
+
     def __init__(self, county_id, race):
         self.county_id = county_id
 

@@ -87,6 +87,7 @@ def load_login_manager(app):
     login_manager.init_app(app)
     login_manager.login_view = 'login'
 
+    # FIXME: @klondikemarlen
     # This can't be the correct place for this decorator?
 
     @login_manager.user_loader
