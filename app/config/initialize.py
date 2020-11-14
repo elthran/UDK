@@ -31,11 +31,6 @@ def initialize(name):
     load_commands(app)
     load_hooks(app)
 
-    # @klondikemarlen put this in a better place and make it better
-    app.config['SECRET_KEY'] = "flask-login"
-
-    load_login_manager(app)
-
     reset_database(app)
 
     return app
