@@ -65,7 +65,7 @@ def load_commands(app):
 
 def load_extensions(app):
     # For development, allow separate front/back-ends.
-    CORS(app, resources={r'/*': {'origins': '*'}})
+    cors = CORS(app, supports_credentials=True)
 
     login_manager.init_app(app)
 
