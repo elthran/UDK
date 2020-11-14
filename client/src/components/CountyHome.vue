@@ -109,7 +109,10 @@ export default {
       return countyApi.fetch(user.countyId).then(({ county }) => {
         Object.assign(this.county, county);
       })
+      .catch((response) => console.log('response', response))
+
     })
+    .catch((response) => console.log('response', response))
     .finally(() => {
       this.loading = false;
     });

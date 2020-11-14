@@ -22,13 +22,15 @@ def create_user(username):
 def login(username):
     user = User.query.filter_by(username=username).first()
     if user:
-        login_user(user)
-        # FIXME: return current_user.api_token.token
-        return jsonify(
-            user=dict(id=user.id,
-                      username=user.username,
-                      countyId=user.county.id)
-        )
+        if login_user(user):
+            # FIXME: return current_user.api_token.token
+            return jsonify(
+                user=dict(id=user.id,
+                          username=user.username,
+                          countyId=user.county.id)
+            )
+        return jsonify(error="Failed to log in user")
+
     else:
         user = create_user(username)
         login_user(user)

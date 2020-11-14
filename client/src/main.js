@@ -19,10 +19,11 @@ const router = new VueRouter({
 
 
 // FIXME: move to a api and call on the login page
-http.get('/api/session/login/test_user').
-  then((response) => {
+http.get('/api/session/login/client_user')
+  .then((response) => {
     window.CURRENT_USER_ID = response.data.user.id
   })
+  .catch((response) => console.log('response', response))
 
 
 new Vue({
