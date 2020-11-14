@@ -1,3 +1,6 @@
+from expects import expect, have_keys
+
+
 def test_api_users(client):
     """Start with a blank database."""
 
