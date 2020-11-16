@@ -1,6 +1,12 @@
 from expects import expect, have_keys
 
-from app.serializers.base_serializer import BaseSerializer, field, fields
+from app.serializers.base_serializer import (
+    BaseSerializer,
+    camel_case,
+    field,
+    fields,
+)
+
 
 class MockModel:
     def __init__(self, id_=None, username=None, first_name=None, last_name=None):
@@ -25,6 +31,16 @@ class TestBaseSerializer:
 
         expect(MockSerializer.call(mock_model)).to(have_keys(id=id_, username=username))
 
+    def test_call_camel_case(self, faker):
+        class MockSerializer(BaseSerializer):
+            _fields = fields("first_name")
+
+        first_name = faker.first_name()
+
+        mock_model = MockModel(first_name=first_name)
+
+        expect(MockSerializer.call(mock_model)).to(have_keys(firstName=first_name))
+
     def test_field(self, faker):
         class MockSerializer(BaseSerializer):
             _fields = fields("id", "username")
@@ -41,4 +57,13 @@ class TestBaseSerializer:
 
         expect(MockSerializer.call(mock_model)).to(
             have_keys(id=id_, username=username, fullname=f"{first_name} {last_name}")
+        )
+
+    def test_camel_case(self):
+        assert camel_case("Hello World") == "helloWorld"
+        assert camel_case("Hello,world") == "hello,World"
+        assert camel_case("Hello_world") == "helloWorld"
+        assert (
+            camel_case("hello_world.txt_includehelp-WEBSITE")
+            == "helloWorld.TxtIncludehelpWebsite"
         )

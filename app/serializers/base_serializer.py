@@ -1,3 +1,6 @@
+from re import sub
+
+
 def field(name, getter: None):
     assert getter is not None
 
@@ -12,8 +15,13 @@ def fields(*names):
     return data
 
 
+def camel_case(string):
+    string = sub(r"(_|-)+", " ", string).title().replace(" ", "")
+    return string[0].lower() + string[1:]
+
 
 class BaseSerializer:
+    _key_transformer = camel_case
     _fields = None
 
     @classmethod
@@ -22,6 +30,11 @@ class BaseSerializer:
 
         if cls._fields is not None:
             for field, getter in cls._fields:
+                if cls._key_transformer is not None:
+                    transformed_field = cls._key_transformer(field)
+                    data[transformed_field] = getter(model)
+                    continue
+
                 data[field] = getter(model)
 
         return data
