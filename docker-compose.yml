@@ -16,7 +16,7 @@ services:
     ports:
       - '5000:5000'
     volumes:
-      - .:/usr/src/app
+      - .:/usr/src/udk
 
   mysql:
     image: mysql:5.7
@@ -43,7 +43,7 @@ services:
     ports:
       - '8080:8080'
     volumes:
-      - ./client:/usr/src/app
+      - ./client:/usr/src/udk
 
   test:
     image: udk/app:development
@@ -57,7 +57,7 @@ services:
     depends_on:
       - mysql
     volumes:
-      - .:/usr/src/app
+      - .:/usr/src/udk
 
 # Names our volume
 volumes:

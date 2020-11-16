@@ -14,9 +14,9 @@ RUN pip3 install pipenv
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
-ENV PYTHONPATH /usr/src/app
+ENV PYTHONPATH /usr/src/udk
 
-WORKDIR /usr/src/app
+WORKDIR /usr/src/udk
 
 COPY Pipfile Pipfile.lock ./
 RUN pipenv install --dev --deploy --ignore-pipfile
