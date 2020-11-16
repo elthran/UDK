@@ -18,23 +18,17 @@ class TestBaseSerializer:
         class MockSerializer(BaseSerializer):
             _fields = fields("id", "username")
 
-
         id_ = faker.pyint()
         username = faker.user_name()
 
         mock_model = MockModel(id_=id_, username=username)
 
-        expect(MockSerializer.call(mock_model)).to(
-            have_keys(id=id_, username=username)
-        )
+        expect(MockSerializer.call(mock_model)).to(have_keys(id=id_, username=username))
 
     def test_field(self, faker):
         class MockSerializer(BaseSerializer):
             _fields = fields("id", "username")
-            _fields.append(
-                field("fullname", getter=lambda mock: mock.get_full_name())
-            )
-
+            _fields.append(field("fullname", getter=lambda mock: mock.get_full_name()))
 
         id_ = faker.pyint()
         username = faker.user_name()
@@ -42,16 +36,9 @@ class TestBaseSerializer:
         last_name = faker.last_name()
 
         mock_model = MockModel(
-            id_=id_,
-            username=username,
-            first_name=first_name,
-            last_name=last_name
+            id_=id_, username=username, first_name=first_name, last_name=last_name
         )
 
         expect(MockSerializer.call(mock_model)).to(
-            have_keys(
-                id=id_,
-                username=username,
-                fullname=f"{first_name} {last_name}"
-            )
+            have_keys(id=id_, username=username, fullname=f"{first_name} {last_name}")
         )

@@ -7,12 +7,7 @@ def field(name, getter: None):
 def fields(*names):
     data = []
     for name in names:
-        data.append(
-            field(
-                name,
-                getter=lambda model, name=name: getattr(model, name)
-            )
-        )
+        data.append(field(name, getter=lambda model, name=name: getattr(model, name)))
 
     return data
 
@@ -20,7 +15,6 @@ def fields(*names):
 
 class BaseSerializer:
     _fields = None
-
 
     @classmethod
     def _serialize(cls, model):
@@ -31,7 +25,6 @@ class BaseSerializer:
                 data[field] = getter(model)
 
         return data
-
 
     @classmethod
     def call(cls, model_or_models):
