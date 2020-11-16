@@ -3,8 +3,9 @@ from flask import jsonify
 from app.models.counties import County
 
 
-def get_county(id):
-    county = County.query.get(id)
+def get_county(id_):
+
+    county = County.query.get(id_)
 
     basic_county_view = dict(
         title=county.title,
@@ -69,12 +70,7 @@ def get_county(id):
         rations=county.preference.rations,
         productionChoice=county.preference.production_choice,
     )
-    if county.user_id == 1:
-        # Replace with current_user.id == county.user_id
-        return jsonify(
-            county=full_county_view
-        )
 
     return jsonify(
-        county=basic_county_view
+        county=full_county_view
     )

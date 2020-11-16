@@ -12,7 +12,7 @@ sqlalchemy = "*"
 sqlalchemy-utils = "*"
 flask-sqlalchemy = "*"
 mysqlclient = "*"
-flask-login = "*"
+flask-login = "==0.4.1"
 flask-cors = "*"
 expects = "*"
 

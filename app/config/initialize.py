@@ -11,6 +11,7 @@ from . import environment
 from .database_extension import db
 from .commands import db_cli
 from app.config.hooks import add_auto_commit
+from app.config.initializers.flask_login import login_manager
 
 from app.models.users import User
 from app.models.worlds import World
@@ -64,7 +65,9 @@ def load_commands(app):
 
 def load_extensions(app):
     # For development, allow separate front/back-ends.
-    CORS(app, resources={r'/*': {'origins': '*'}})
+    cors = CORS(app, supports_credentials=True)
+
+    login_manager.init_app(app)
 
     engine = create_engine(app.config["SQLALCHEMY_DATABASE_URI"])
     if not database_exists(engine.url):

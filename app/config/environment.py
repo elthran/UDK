@@ -13,6 +13,9 @@ class BaseConfig:
     """Base configuration."""
     ENV = 'base'
     DEBUG = False
+
+    # FIXME: Move this to an environment variable
+    SECRET_KEY = 'udk_dev_secret'
     BCRYPT_LOG_ROUNDS = 13
     THREADS_PER_PAGE = 2
     SQLALCHEMY_TRACK_MODIFICATIONS = False

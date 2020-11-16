@@ -71,17 +71,19 @@
 
     <div>
       <ul>
-        <li><buton><a href="http://localhost:5000/debug/advance_day">Advance Day</a></buton></li>
-        <li><buton><a href="http://localhost:5000/debug/buy_footman">Buy Footman</a></buton></li>
-        <li><buton><a href="http://localhost:5000/debug/buy_archer">Buy Archer</a></buton></li>
+        <li><button @click="loginAsNewUser">Login as New User</button></li>
+        <li><button><a href="http://localhost:5000/debug/advance_day">Advance Day</a></button></li>
+        <li><button><a href="http://localhost:5000/debug/buy_footman">Buy Footman</a></button></li>
+        <li><button><a href="http://localhost:5000/debug/buy_archer">Buy Archer</a></button></li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import http from '@/http-client'
 import countyApi from '@/api/counties-api';
-import userApi from '@/api/users-api';
+import systemApi from '@/api/system-api';
 
 export default {
   name: 'CountyHome',
@@ -90,28 +92,45 @@ export default {
   data() {
     return {
       user: {},
-      county: {
-        economy: {},
-      },
+      county: {},
       loading: false,
     };
   },
   computed: {},
   mounted() {
     this.loading = true;
-    Promise.all([countyApi.fetch(1), userApi.fetch(1)])
-      .then(([{ county }, { user }]) => {
-        Object.assign(this.county, county);
-        Object.assign(this.user, user);
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+    this.loadCurrentUser()
+    .finally(() => {
+      this.loading = false;
+    });
   },
   methods: {
-    urlFor(name) {
-      return `/${name}`;
+    loadCurrentUser () {
+      return systemApi.currentUser().then(({ user }) => {
+        if (!user.id) {
+          this.$router.push('/session/login')
+          return
+        }
+
+        this.user = user
+        return countyApi.fetch(user.countyId).then(({ county }) => {
+          this.county = county
+        })
+        .catch((response) => console.log('response', response))
+
+      })
+      .catch((response) => console.log('response', response))
     },
+    loginAsNewUser () {
+      const newUsername = this.user.username + 'x'
+      http.get(`/api/session/login/${newUsername}`)
+      .then((response) => {
+        console.debug('Succesfully create new user:', response.data.user)
+        return this.loadCurrentUser()
+      })
+      .catch((response) => console.log('response', response))
+
+    }
   },
 };
 </script>
