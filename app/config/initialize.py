@@ -9,7 +9,8 @@ from time import sleep
 
 from . import environment
 from .database_extension import db
-from .commands import db_cli, add_auto_commit
+from .commands import db_cli
+from app.config.hooks import add_auto_commit
 
 from app.models.users import User
 from app.models.worlds import World
