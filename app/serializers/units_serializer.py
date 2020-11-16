@@ -19,4 +19,6 @@ class UnitsSerializer(BaseSerializer):
         "description",
     )
 
-    _fields.append(field("available", getter=lambda unit: unit.get_available()))
+    _fields.append(
+        field("available", getter=lambda unit: unit.get_available())
+    )
