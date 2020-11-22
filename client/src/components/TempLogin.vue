@@ -27,7 +27,7 @@ export default {
     loginUser () {
       return systemApi.currentUser().then(({ user }) => {
         if (!user.id) {
-          this.$router.push('/session/login')
+          this.$router.push('/authentication/login')
           return
         }
         this.user = user
@@ -39,7 +39,7 @@ export default {
       .catch((response) => console.log('response', response))
     },
     createUser () {
-      http.get(`/api/session/create`)
+      http.get(`/api/authentication/create`)
       .then(() => {
         console.debug('Succesfully created user')
         return 'hello'

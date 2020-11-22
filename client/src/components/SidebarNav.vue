@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     logoutCurrentUser () {
-      http.get(`/api/session/logout`)
+      http.get(`/api/authentication/logout`)
       .then(() => {
         console.debug('Succesfully logged out')
         return 'hello'
