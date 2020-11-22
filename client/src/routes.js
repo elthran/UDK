@@ -27,8 +27,8 @@ export default [
     component: CountyInfrastructure,
   },
   {
-    path: '/session/login',
-    name: 'session.login',
+    path: '/authentication/login',
+    name: 'authentication.login',
     component: TempLogin,
   },
   {

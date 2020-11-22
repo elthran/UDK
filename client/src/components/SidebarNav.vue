@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import http from "@/http-client";
+import authenticationApi from "@/api/authentication-api";
 
 export default {
   name: 'SidebarNav',
@@ -89,12 +89,13 @@ export default {
   },
   methods: {
     logoutCurrentUser () {
-      http.get(`/api/authentication/logout`)
-      .then(() => {
-        console.debug('Succesfully logged out')
-        return 'hello'
+      authenticationApi.logout()
+      .then(({ message }) => {
+        window.CURRENT_USER_ID = null
+        console.debug(message)
+        this.$router.push({ name: 'authentication.login' })
       })
-      .catch((response) => console.log('response', response))
+      .catch((error) => console.log('error', error))
     }
   },
 }

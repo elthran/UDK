@@ -4,45 +4,58 @@
     To login, please type in a valid username and password.
     To create an account, please type in a new username and password.
     <br><br>
-    Username: <input>
+    <form @submit.prevent>
+      <label for="username">Username: </label>
+      <input
+        id="username"
+        type="text"
+        v-model="username"
+      />
+    </form>
     <br><br>
-    <button @click="loginUser">Login</button> <button @click="createUser">Create Account</button>
+    <button
+      @click="loginUser"
+      @keyup.enter="loginUser"
+    >Login</button> <button @click="createUser">Create Account</button>
     <br><br>Put error response here:
   </div>
 </template>
 
 <script>
-import http from "@/http-client";
-import systemApi from "@/api/system-api";
-import countyApi from "@/api/counties-api";
+import authenticationApi from "@/api/authentication-api";
+import usersApi from '@/api/users-api'
 
 export default {
   name: 'TempLogin',
   data () {
     return {
       loading: false,
+      username: null,
     }
   },
   methods: {
     loginUser () {
-      return systemApi.currentUser().then(({ user }) => {
-        if (!user.id) {
-          this.$router.push('/authentication/login')
-          return
+      return authenticationApi.login({
+        username: this.username
+      }).then(({ user }) => {
+        console.log('user', user)
+
+        if (user && user.id) {
+          window.CURRENT_USER_ID = user.id
+          this.$router.push({ name: 'county.home' })
         }
-        this.user = user
-        return countyApi.fetch(user.countyId).then(({ county }) => {
-          this.county = county
-        })
-        .catch((response) => console.log('response', response))
       })
-      .catch((response) => console.log('response', response))
+      .catch((error) => {
+        console.log('error', error)
+      })
     },
     createUser () {
-      http.get(`/api/authentication/create`)
-      .then(() => {
-        console.debug('Succesfully created user')
-        return 'hello'
+      usersApi.create({
+        username: this.username
+      })
+      .then(({ user }) => {
+        this.username = user.username
+        return this.loginUser()
       })
       .catch((response) => console.log('response', response))
     }

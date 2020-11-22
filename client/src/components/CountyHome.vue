@@ -98,6 +98,10 @@ export default {
   computed: {},
   mounted() {
     this.loading = true;
+    if (!window.CURRENT_USER_ID) {
+      this.$router.push({ name: 'authentication.login' })
+    }
+
     this.loadCurrentUser()
     .finally(() => {
       this.loading = false;

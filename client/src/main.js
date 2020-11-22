@@ -5,9 +5,6 @@ import App from '@/App.vue';
 import routes from '@/routes';
 import '@/assets/css/global.css'
 
-// remove this when a real login page exists
-import http from '@/http-client';
-
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
 
@@ -17,14 +14,14 @@ const router = new VueRouter({
   routes,
 });
 
-
-// FIXME: move to a api and call on the login page
-http.get('/api/session/login/client_user')
-  .then((response) => {
-    window.CURRENT_USER_ID = response.data.user.id
-  })
-  .catch((response) => console.log('response', response))
-
+window.CURRENT_USER_ID = null
+router.beforeEach((to, from, next) => {
+  if (to.name !== 'authentication.login' && !window.CURRENT_USER_ID) {
+    next({ name: 'authentication.login' })
+  } else {
+    next()
+  }
+})
 
 new Vue({
   router,
