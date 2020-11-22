@@ -1,5 +1,6 @@
 from expects import expect, have_keys
 
+
 class TestApiUsers:
     def test_get_user(self, client):
         """Start with a blank database."""

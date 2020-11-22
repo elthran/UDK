@@ -1,6 +1,7 @@
 from flask import jsonify
 
 from app.models.counties import County
+from app.serializers.units_serializer import UnitsSerializer
 
 
 def get_county(id_):
@@ -32,25 +33,7 @@ def get_county(id_):
         maxMana=10,
         manaChange=1,
         offensivePower=county.military.offensive_power(),
-        units=[
-            dict(
-                id=unit.id,
-                className=unit.class_name,
-                classNamePlural=unit.class_name_plural,
-                totalOwned=unit.total_owned,
-                available=unit.get_available(),
-                goldCost=unit.gold_cost,
-                woodCost=unit.wood_cost,
-                ironCost=unit.iron_cost,
-                upkeep=unit.upkeep,
-                attack=unit.attack,
-                defence=unit.defence,
-                health=unit.health,
-                category=unit.category,
-                armour=unit.armour,
-                description=unit.description
-            ) for unit in county.military.units
-        ],
+        units=UnitsSerializer.call(county.military.units),
         buildings=[
             dict(
                 id=building.id,
