@@ -70,7 +70,7 @@
           <td><a href="#"><strike>Credits</strike></a></td>
         </tr>
         <tr>
-          <td><router-link :to="{ name: 'session.login' }">Logout</router-link></td>
+          <td><button @click="logoutCurrentUser">Logout</button></td>
         </tr>
       </table>
     </nav>
@@ -78,13 +78,25 @@
 </template>
 
 <script>
+import http from "@/http-client";
+
 export default {
   name: 'SidebarNav',
   data () {
     return {
       loading: false,
     }
-  }
+  },
+  methods: {
+    logoutCurrentUser () {
+      http.get(`/api/session/logout`)
+      .then(() => {
+        console.debug('Succesfully logged out')
+        return 'hello'
+      })
+      .catch((response) => console.log('response', response))
+    }
+  },
 }
 </script>
 

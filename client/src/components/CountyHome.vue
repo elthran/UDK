@@ -71,7 +71,6 @@
 
     <div>
       <ul>
-        <li><button @click="loginAsNewUser">Login as New User</button></li>
         <li><button><a href="http://localhost:5000/debug/advance_day">Advance Day</a></button></li>
         <li><button><a href="http://localhost:5000/debug/buy_footman">Buy Footman</a></button></li>
         <li><button><a href="http://localhost:5000/debug/buy_archer">Buy Archer</a></button></li>
