@@ -91,7 +91,7 @@ export default {
     logoutCurrentUser () {
       authenticationApi.logout()
       .then(({ message }) => {
-        window.CURRENT_USER_ID = null
+        window.localStorage.removeItem('currentUserId')
         console.debug(message)
         this.$router.push({ name: 'authentication.login' })
       })

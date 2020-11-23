@@ -38,10 +38,10 @@ export default {
       return authenticationApi.login({
         username: this.username
       }).then(({ user }) => {
-        console.log('user', user)
+        console.debug('user', user)
 
         if (user && user.id) {
-          window.CURRENT_USER_ID = user.id
+          window.localStorage.setItem('currentUserId', user.id)
           this.$router.push({ name: 'county.home' })
         }
       })
