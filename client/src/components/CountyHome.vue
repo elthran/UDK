@@ -80,7 +80,6 @@
 </template>
 
 <script>
-import http from '@/http-client'
 import countyApi from '@/api/counties-api';
 import systemApi from '@/api/system-api';
 
@@ -120,16 +119,6 @@ export default {
       })
       .catch((response) => console.log('response', response))
     },
-    loginAsNewUser () {
-      const newUsername = this.user.username + 'x'
-      http.get(`/api/session/login/${newUsername}`)
-      .then((response) => {
-        console.debug('Succesfully create new user:', response.data.user)
-        return this.loadCurrentUser()
-      })
-      .catch((response) => console.log('response', response))
-
-    }
   },
 };
 </script>
