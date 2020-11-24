@@ -22,7 +22,6 @@ def login():
         return jsonify(error="User does not exist. Failed to login."), 401
 
     if login_user(user):
-        print("user", user)
         # FIXME: return current_user.api_token.token
         return jsonify(user=UsersSerializer.call(user))
 
@@ -37,5 +36,4 @@ def logout():
     """
     if logout_user():
         return jsonify(message="Logout successful."), 200
-
     return jsonify(error="User failed to logout."), 422
