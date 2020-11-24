@@ -1,6 +1,7 @@
 const CountyHome = () => import(/* webpackChunkName: "CountyHome" */ '@/components/CountyHome');
 const CountyEconomy = () => import(/* webpackChunkName: "CountyEconomy" */ '@/components/CountyEconomy');
 const CountyInfrastructure = () => import(/* webpackChunkName: "CountyInfrastructure" */ '@/components/CountyInfrastructure');
+const TempLogin = () => import(/* webpackChunkName: "TempLogin" */ '@/components/TempLogin');
 const Ping = () => import(/* webpackChunkName: "Ping" */ '@/components/Ping');
 
 
@@ -24,6 +25,11 @@ export default [
     path: '/county/infrastructure',
     name: 'county.infrastructure',
     component: CountyInfrastructure,
+  },
+  {
+    path: '/authentication/login',
+    name: 'authentication.login',
+    component: TempLogin,
   },
   {
     path: '*',
