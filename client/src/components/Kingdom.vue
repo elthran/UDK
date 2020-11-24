@@ -1,12 +1,18 @@
 <template>
   <div v-if="!loading">
     <button @click="kingdomWest" :disabled="disableWest">West</button>
-    <br>
-    CURRENT KINGDOM INDEX: {{ kingdomIndex }}
-    <br>
-    {{ selectedKingdom }}
-    <br>
+    {{ selectedKingdom.name }}
     <button @click="kingdomEast" :disabled="disableEast">East</button>
+    <br>
+    <ul>
+          <li
+            v-for="county in selectedKingdom.counties"
+            :key="county.id"
+          >
+            {{ county.name }} led by {{ county.title }} {{ county.leader }}
+            with {{ county.land }} acres
+          </li>
+    </ul>
   </div>
 </template>
 

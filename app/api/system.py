@@ -25,13 +25,18 @@ def get_current_county():
 
 def get_current_kingdom():
     if current_user.is_authenticated:
+        kingdom = current_user.county.kingdom
+
         kingdom = dict(
+            id=kingdom.id,
+            name=kingdom.name,
             counties=[
                 dict(
                     id=county.id,
                     name=county.name,
                     leader=county.leader,
-                ) for county in current_user.county.kingdom.counties],
+                    land=county.land,
+                ) for county in kingdom.counties],
         )
         return jsonify(
             kingdom=kingdom
