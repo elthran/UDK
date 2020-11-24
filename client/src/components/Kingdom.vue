@@ -26,9 +26,6 @@ export default {
   props: {},
   data() {
     return {
-      user: {},
-      county: {},
-      kingdom: {},
       kingdoms: [],
       kingdomIndex: null,
       loading: false,
@@ -55,8 +52,7 @@ export default {
 
         systemApi.currentKingdom()
         .then(({ kingdom }) => {
-          this.kingdom = kingdom
-          this.kingdomIndex = this.kingdoms.findIndex((k) => k.id === this.kingdom.id)
+          this.kingdomIndex = this.kingdoms.findIndex((k) => k.id === kingdom.id)
         })
         .finally(() => {
           this.loading = false

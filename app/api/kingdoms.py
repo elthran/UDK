@@ -15,7 +15,7 @@ def get_kingdoms():
                 id=county.id,
                 name=county.name,
                 leader=county.leader,
-                land=county.land,
+                land=county.economy.land,
             ) for county in kingdom.counties],
     ) for kingdom in kingdoms]
 
@@ -36,7 +36,7 @@ def get_kingdom(id_):
                 id=county.id,
                 name=county.name,
                 leader=county.leader,
-                land=county.land,
+                land=county.economy.land,
             ) for county in kingdom.counties],
     )
 

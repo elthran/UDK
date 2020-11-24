@@ -35,7 +35,7 @@ def get_current_kingdom():
                     id=county.id,
                     name=county.name,
                     leader=county.leader,
-                    land=county.land,
+                    land=county.economy.land,
                 ) for county in kingdom.counties],
         )
         return jsonify(
