@@ -69,19 +69,35 @@
         <tr>
           <td><a href="#"><strike>Credits</strike></a></td>
         </tr>
+        <tr>
+          <td><button @click="logoutCurrentUser">Logout</button></td>
+        </tr>
       </table>
     </nav>
   </div>
 </template>
 
 <script>
+import authenticationApi from "@/api/authentication-api";
+
 export default {
   name: 'SidebarNav',
   data () {
     return {
       loading: false,
     }
-  }
+  },
+  methods: {
+    logoutCurrentUser () {
+      authenticationApi.logout()
+      .then(({ message }) => {
+        window.localStorage.removeItem('currentUserId')
+        console.debug(message)
+        this.$router.push({ name: 'authentication.login' })
+      })
+      .catch((error) => console.log('error', error))
+    }
+  },
 }
 </script>
 

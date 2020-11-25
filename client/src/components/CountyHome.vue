@@ -71,7 +71,6 @@
 
     <div>
       <ul>
-        <li><button @click="loginAsNewUser">Login as New User</button></li>
         <li><button><a href="http://localhost:5000/debug/advance_day">Advance Day</a></button></li>
         <li><button><a href="http://localhost:5000/debug/buy_footman">Buy Footman</a></button></li>
         <li><button><a href="http://localhost:5000/debug/buy_archer">Buy Archer</a></button></li>
@@ -81,7 +80,6 @@
 </template>
 
 <script>
-import http from '@/http-client'
 import countyApi from '@/api/counties-api';
 import systemApi from '@/api/system-api';
 
@@ -121,16 +119,6 @@ export default {
       })
       .catch((response) => console.log('response', response))
     },
-    loginAsNewUser () {
-      const newUsername = this.user.username + 'x'
-      http.get(`/api/session/login/${newUsername}`)
-      .then((response) => {
-        console.debug('Succesfully create new user:', response.data.user)
-        return this.loadCurrentUser()
-      })
-      .catch((response) => console.log('response', response))
-
-    }
   },
 };
 </script>
