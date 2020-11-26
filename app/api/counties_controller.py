@@ -2,6 +2,7 @@ from flask import jsonify
 
 from app.models.counties import County
 from app.serializers.unit_serializer import UnitSerializer
+from app.serializers.building_serializer import BuildingSerializer
 
 
 def get_county(id_):
@@ -33,21 +34,7 @@ def get_county(id_):
         manaChange=1,
         offensivePower=county.military.offensive_power(),
         units=UnitSerializer.call(county.military.units),
-        buildings=[
-            dict(
-                id=building.id,
-                className=building.class_name,
-                classNamePlural=building.class_name_plural,
-                total_owned=building.total_owned,
-                goldCost=building.gold_cost,
-                woodCost=building.wood_cost,
-                stoneCost=building.stone_cost,
-                output=building.output,
-                worker_capacity=building.worker_capacity,
-                description=building.description,
-            )
-            for building in county.infrastructure.buildings
-        ],
+        buildings=BuildingSerializer.call(county.infrastructure.buildings),
         employedWorkers=county.infrastructure.get_employed_workers(),
         grainStores=county.economy.grain_stores,
         taxRate=county.preference._tax_rate,
