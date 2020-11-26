@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import countyApi from '@/api/counties-api';
+import countiesApi from '@/api/counties-api';
 import systemApi from '@/api/system-api';
 
 export default {
@@ -111,7 +111,7 @@ export default {
         }
 
         this.user = user
-        return countyApi.fetch(user.countyId).then(({ county }) => {
+        return countiesApi.fetch(user.countyId).then(({ county }) => {
           this.county = county
         })
         .catch((response) => console.log('response', response))

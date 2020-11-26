@@ -9,7 +9,9 @@
           </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>Kingdom</strike></a></td>
+          <td>
+            <router-link :to="{ name: 'kingdom' }">Kingdom</router-link>
+          </td>
         </tr>
       </table>
       <h3>Advisors</h3>

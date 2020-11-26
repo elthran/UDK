@@ -93,16 +93,43 @@ def reset_database(app):
         user = User("test_user")
         user.save()
 
+        ai_user_1 = User("ai_kingdom_1")
+        ai_user_1.save()
+
+        ai_user_2 = User("ai_kingdom_2")
+        ai_user_2.save()
+
         world = World()
         world.save()
 
         kingdom = Kingdom(name="Eldarion")
         kingdom.save()
 
+        kingdom = Kingdom(name="Robotica")
+        kingdom.save()
+
         county = County(kingdom_id=1,
                         name="Test County",
                         leader="Test Leader",
                         user_id=user.id,
+                        race=Races.HUMAN,
+                        title=Titles.SIR,
+                        background=Backgrounds.PRIEST)
+        county.save()
+
+        county = County(kingdom_id=1,
+                        name="Mechland",
+                        leader="Mechazoid",
+                        user_id=ai_user_1.id,
+                        race=Races.HUMAN,
+                        title=Titles.SIR,
+                        background=Backgrounds.PRIEST)
+        county.save()
+
+        county = County(kingdom_id=2,
+                        name="Automatia",
+                        leader="Automaton",
+                        user_id=ai_user_2.id,
                         race=Races.HUMAN,
                         title=Titles.SIR,
                         background=Backgrounds.PRIEST)
