@@ -3,8 +3,6 @@ from expects import expect, have_keys
 from app.serializers.base_serializer import (
     BaseSerializer,
     camel_case,
-    field,
-    fields,
 )
 
 
@@ -22,7 +20,9 @@ class MockModel:
 class TestBaseSerializer:
     def test_call(self, faker):
         class MockSerializer(BaseSerializer):
-            _fields = fields("id", "username")
+            def __init__(self, model):
+                super().__init__(model)
+                self.fields("id", "username")
 
         id_ = faker.pyint()
         username = faker.user_name()
@@ -39,7 +39,9 @@ class TestBaseSerializer:
         """
 
         class MockSerializer(BaseSerializer):
-            _fields = fields("first_name")
+            def __init__(self, model):
+                super().__init__(model)
+                self.fields("first_name")
 
         first_name = faker.first_name()
 
@@ -49,8 +51,9 @@ class TestBaseSerializer:
 
     def test_field(self, faker):
         class MockSerializer(BaseSerializer):
-            _fields = fields("id", "username")
-            _fields.append(field("fullname", getter=lambda mock: mock.get_full_name()))
+            def __init__(self, model):
+                super().__init__(model)
+                self.fields("id", "username", fullname=model.get_full_name())
 
         id_ = faker.pyint()
         username = faker.user_name()
