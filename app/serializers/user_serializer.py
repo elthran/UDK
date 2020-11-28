@@ -1,4 +1,4 @@
-from app.serializers.base_serializer import BaseSerializer, fields
+from app.serializers.base_serializer import BaseSerializer
 
 
 class UserSerializer(BaseSerializer):
