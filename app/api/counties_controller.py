@@ -5,7 +5,6 @@ from app.serializers.units_serializer import UnitsSerializer
 
 
 def get_county(id_):
-
     county = County.query.get(id_)
 
     basic_county_view = dict(
