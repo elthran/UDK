@@ -21,11 +21,9 @@ def camel_case(string):
 class BaseSerializer:
     def __init__(self, model, view=None, key_transformer=camel_case):
         self.model = model
+        self.current_view = view
         self._key_transformer = key_transformer
         self._fields = {}
-        self._current_view = view
-
-        self.apply_view(view)
 
     def fields(self, *basic_fields, **custom_fields):
         self._fields = {}
@@ -51,6 +49,7 @@ class BaseSerializer:
     @classmethod
     def _serialize(cls, model, **kwargs):
         serializer = cls(model, **kwargs)
+        serializer.apply_view(serializer.current_view)
 
         try:
             return serializer.tranform_keys()
