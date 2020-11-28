@@ -1,7 +1,7 @@
 from app.serializers.base_serializer import BaseSerializer, fields, field
 
 
-class UnitsSerializer(BaseSerializer):
+class UnitSerializer(BaseSerializer):
     _fields = fields(
         "id",
         "class_name",
@@ -19,6 +19,4 @@ class UnitsSerializer(BaseSerializer):
         "description",
     )
 
-    _fields.append(
-        field("available", getter=lambda unit: unit.get_available())
-    )
+    _fields.append(field("available", getter=lambda unit: unit.get_available()))
