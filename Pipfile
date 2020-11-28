@@ -4,9 +4,9 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-pytest = "*"
-expects = "*"
-faker = "*"
+pytest = "*"   # Test runner
+expects = "*"  # Allows from readable tests, expect(something).to(have(some_property))
+faker = "*"  # Allows for easier test by generating fake data.
 
 [packages]
 flask = "*"

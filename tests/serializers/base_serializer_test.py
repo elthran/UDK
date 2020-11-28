@@ -32,6 +32,12 @@ class TestBaseSerializer:
         expect(MockSerializer.call(mock_model)).to(have_keys(id=id_, username=username))
 
     def test_call_camel_case(self, faker):
+        """Test that the serializer converts all field names to camel case.
+
+        Args:
+            faker: a pytest fixture for generation fake data.
+        """
+
         class MockSerializer(BaseSerializer):
             _fields = fields("first_name")
 
@@ -60,6 +66,8 @@ class TestBaseSerializer:
         )
 
     def test_camel_case(self):
+        """Assert that the camel_case function converts strings to camelCase."""
+
         assert camel_case("Hello World") == "helloWorld"
         assert camel_case("Hello,world") == "hello,World"
         assert camel_case("Hello_world") == "helloWorld"
