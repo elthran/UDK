@@ -1,9 +1,6 @@
 from expects import expect, have_keys
 
-from app.serializers.base_serializer import (
-    BaseSerializer,
-    camel_case,
-)
+from app.serializers.base_serializer import BaseSerializer, camel_case
 
 
 class MockModel:
@@ -49,7 +46,7 @@ class TestBaseSerializer:
 
         expect(MockSerializer.call(mock_model)).to(have_keys(firstName=first_name))
 
-    def test_field(self, faker):
+    def test_custom_fields(self, faker):
         class MockSerializer(BaseSerializer):
             def __init__(self, model):
                 super().__init__(model)
@@ -77,4 +74,22 @@ class TestBaseSerializer:
         assert (
             camel_case("hello_world.txt_includehelp-WEBSITE")
             == "helloWorld.TxtIncludehelpWebsite"
+        )
+
+    def test_view(self, faker):
+        class MockSerializer(BaseSerializer):
+            def __init__(self, model, view=None):
+                super().__init__(model, view=view)
+                self.fields("id")
+
+            def full_view(self, model):
+                self.add_fields("username")
+
+        id_ = faker.pyint()
+        username = faker.user_name()
+
+        mock_model = MockModel(id_=id_, username=username)
+
+        expect(MockSerializer.call(mock_model, view="full_view")).to(
+            have_keys(id=id_, username=username)
         )
