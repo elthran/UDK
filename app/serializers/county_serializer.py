@@ -7,14 +7,16 @@ class CountySerializer(BaseSerializer):
     def __init__(self, county, view=None):
         super().__init__(county, view=view)
         self.fields(
-            "title",
+            "id",
+            "name",
             "leader",
+            "title",
             "race",
+            land=county.economy.land,
         )
 
     def full_view(self, county):
         self.add_fields(
-            "name",
             "day",
             "background",
             population=county.economy.population,
