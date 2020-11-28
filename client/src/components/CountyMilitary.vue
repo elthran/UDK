@@ -21,8 +21,8 @@
             style="font-size:20px"
           >
             <td>{{ unit.className }}</td>
-            <td>{{ unit.goldCost }}; {{ unit.ironCost }}, {{ unit.woodCost }}</td>
-            <td>{{ unit.attack }}>/td>
+            <td>{{ unit.goldCost }} Go; {{ unit.ironCost }} Ir, {{ unit.woodCost }} Wo</td>
+            <td>{{ unit.attack }}</td>
             <td>{{ unit.defence }}</td>
             <td>{{ unit.health }}</td>
             <td>{{ unit.description }}</td>
@@ -38,7 +38,7 @@
 import countyApi from '@/api/counties-api';
 
 export default {
-  name: 'CountyEconomy',
+  name: 'CountyMilitary',
   components: {},
   props: {},
   data() {
@@ -48,6 +48,7 @@ export default {
         economy: {},
         preference: {},
         infrastructure: {},
+        units: {},
       },
       loading: false,
     };
