@@ -1,4 +1,4 @@
-from expects import expect, have_keys
+from expects import expect, have_keys, equal
 
 from app.serializers.base_serializer import BaseSerializer, camel_case
 
@@ -27,6 +27,20 @@ class TestBaseSerializer:
         mock_model = MockModel(id_=id_, username=username)
 
         expect(MockSerializer.call(mock_model)).to(have_keys(id=id_, username=username))
+
+    def test_call_on_array_of_models(self, faker):
+        class MockSerializer(BaseSerializer):
+            def __init__(self, model):
+                super().__init__(model)
+                self.fields("id", "username")
+
+        mock_models = [
+            MockModel(id_=faker.pyint(), username=faker.user_name()) for i in range(3)
+        ]
+
+        expect(MockSerializer.call(mock_models)).to(
+            equal([MockSerializer.call(mock_model) for mock_model in mock_models])
+        )
 
     def test_call_camel_case(self, faker):
         """Test that the serializer converts all field names to camel case.
