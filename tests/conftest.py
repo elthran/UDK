@@ -4,8 +4,10 @@ import pytest
 
 from app.main import app
 
-logger = logging.getLogger("faker")
-logger.setLevel(logging.INFO)  # Quiet faker locale messages down in tests.
+asyncio_logger = logging.getLogger("asyncio")
+asyncio_logger.setLevel(logging.INFO)
+faker_logger = logging.getLogger("faker")
+faker_logger.setLevel(logging.INFO)  # Quiet faker locale messages down in tests.
 
 
 @pytest.fixture
