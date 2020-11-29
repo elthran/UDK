@@ -1,5 +1,5 @@
 from flask import jsonify, redirect
-from flask_login import login_user, current_user
+from flask_login import current_user
 
 from app.main import app
 
@@ -8,18 +8,40 @@ from app.models.worlds import World
 from app.models.counties import County
 
 # actual routes
-from app.api.authentication import login, logout
-from app.api.counties import get_county
-from app.api.users import create_user, get_user, get_users
-from app.api.system import get_current_user
-
+from app.api.authentication_controller import login, logout
+from app.api.counties_controller import get_county
+from app.api.kingdoms_controller import get_kingdom, get_kingdoms
+from app.api.users_controller import create_user, get_user, get_users
+from app.api.system_controller import (
+    get_current_user,
+    get_current_county,
+    get_current_kingdom,
+)
 
 app.add_url_rule("/api/counties/<int:id_>", "get_county", get_county, methods=["GET"])
+
+app.add_url_rule("/api/kingdoms", "get_kingdoms", get_kingdoms, methods=["GET"])
+app.add_url_rule("/api/kingdoms/<int:id_>", "get_kingdom", get_kingdom, methods=["GET"])
+
 app.add_url_rule("/api/authentication/login", "login", login, methods=["POST"])
 app.add_url_rule("/api/authentication/logout", "logout", logout, methods=["POST"])
+
 app.add_url_rule(
     "/api/system/current_user", "get_current_user", get_current_user, methods=["GET"]
 )
+app.add_url_rule(
+    "/api/system/current_county",
+    "get_current_county",
+    get_current_county,
+    methods=["GET"],
+)
+app.add_url_rule(
+    "/api/system/current_kingdom",
+    "get_current_kingdom",
+    get_current_kingdom,
+    methods=["GET"],
+)
+
 app.add_url_rule("/api/users", "create_user", create_user, methods=["POST"])
 app.add_url_rule("/api/users", "get_users", get_users, methods=["GET"])
 app.add_url_rule("/api/users/<int:id_>", "get_user", get_user, methods=["GET"])

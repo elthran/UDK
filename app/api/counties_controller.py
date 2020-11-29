@@ -1,11 +1,10 @@
 from flask import jsonify
 
 from app.models.counties import County
-from app.serializers.units_serializer import UnitsSerializer
+from app.serializers.unit_serializer import UnitSerializer
 
 
 def get_county(id_):
-
     county = County.query.get(id_)
 
     basic_county_view = dict(
@@ -33,7 +32,7 @@ def get_county(id_):
         maxMana=10,
         manaChange=1,
         offensivePower=county.military.offensive_power(),
-        units=UnitsSerializer.call(county.military.units),
+        units=UnitSerializer.call(county.military.units),
         buildings=[
             dict(
                 id=building.id,
@@ -46,7 +45,9 @@ def get_county(id_):
                 output=building.output,
                 worker_capacity=building.worker_capacity,
                 description=building.description,
-            ) for building in county.infrastructure.buildings],
+            )
+            for building in county.infrastructure.buildings
+        ],
         employedWorkers=county.infrastructure.get_employed_workers(),
         grainStores=county.economy.grain_stores,
         taxRate=county.preference._tax_rate,
@@ -54,6 +55,4 @@ def get_county(id_):
         productionChoice=county.preference.production_choice,
     )
 
-    return jsonify(
-        county=full_county_view
-    )
+    return jsonify(county=full_county_view)

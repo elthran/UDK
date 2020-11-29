@@ -2,7 +2,7 @@ from flask import jsonify, request
 from flask_login import login_user, logout_user
 
 from app.models.users import User
-from app.serializers.users_serializer import UsersSerializer
+from app.serializers.user_serializer import UserSerializer
 
 
 def login():
@@ -23,7 +23,7 @@ def login():
 
     if login_user(user):
         # FIXME: return current_user.api_token.token
-        return jsonify(user=UsersSerializer.call(user))
+        return jsonify(user=UserSerializer.call(user))
 
     return jsonify(error="User exists but failed to login.")
 

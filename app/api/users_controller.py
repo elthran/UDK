@@ -2,7 +2,7 @@ from flask import jsonify, request
 
 from app.models.counties import County
 from app.models.users import User
-from app.serializers.users_serializer import UsersSerializer
+from app.serializers.user_serializer import UserSerializer
 
 
 def create_user():
@@ -32,14 +32,14 @@ def create_user():
         background="Warlord",
     )
     county.save()
-    return jsonify(user=UsersSerializer.call(user))
+    return jsonify(user=UserSerializer.call(user))
 
 
 def get_user(id_):
     user = User.query.get(id_)
-    return jsonify(user=UsersSerializer.call(user))
+    return jsonify(user=UserSerializer.call(user))
 
 
 def get_users():
     users = User.query.all()
-    return jsonify(users=[UsersSerializer.call(user) for user in users])
+    return jsonify(users=UserSerializer.call(users))

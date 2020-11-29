@@ -1,7 +1,10 @@
+const Kingdom = () => import(/* webpackChunkName: "Kingdom" */ '@/components/Kingdom');
+
 const CountyHome = () => import(/* webpackChunkName: "CountyHome" */ '@/components/CountyHome');
 const CountyEconomy = () => import(/* webpackChunkName: "CountyEconomy" */ '@/components/CountyEconomy');
 const CountyInfrastructure = () => import(/* webpackChunkName: "CountyInfrastructure" */ '@/components/CountyInfrastructure');
 const CountyMilitary = () => import(/*webpackChunkName: "CountyMilitary" */ '@/components/CountyMilitary');
+
 const TempLogin = () => import(/* webpackChunkName: "TempLogin" */ '@/components/TempLogin');
 const Ping = () => import(/* webpackChunkName: "Ping" */ '@/components/Ping');
 
@@ -11,6 +14,11 @@ export default [
     path: '/ping',
     name: 'Ping',
     component: Ping,
+  },
+  {
+    path: '/kingdom',
+    name: 'kingdom',
+    component: Kingdom,
   },
   {
     path: '/county/home',
