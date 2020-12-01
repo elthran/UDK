@@ -4,7 +4,7 @@ body {
   background-color: rgba(220, 186, 96, 1.0);
 }
 
-div.nav-bar {
+nav.nav-bar {
   flex-basis: 400;
   flex-shrink: 0;
 
@@ -93,6 +93,15 @@ h3 {
 table.infrastructure tr td, th {
   border: 1px solid black;
   padding: 5px 5px 5px 5px;
+}
+
+table.military {
+  border: 1px solid black;
+}
+
+table.military td {
+  border: 1px solid black;
+  text-align: center;
 }
 
 table.odd {

@@ -27,7 +27,7 @@
           </td>
         </tr>
         <tr>
-          <td><a href="#"><strike>War</strike></a></td>
+          <router-link :to="{ name: 'county.military' }">War</router-link>
         </tr>
         <tr>
           <td><a href="#"><strike>Thieves Guild</strike></a></td>

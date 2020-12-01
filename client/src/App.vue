@@ -22,6 +22,7 @@ export default {
 };
 </script>
 
+<!--
 <style scoped>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -41,3 +42,4 @@ export default {
   margin: 5px;
 }
 </style>
+!-->
