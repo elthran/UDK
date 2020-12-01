@@ -1,23 +1,38 @@
 <template>
   <div v-if="!loading">
-    You are not logged in.
-    To login, please type in a valid username and password.
-    To create an account, please type in a new username and password.
-    <br><br>
-    <form @submit.prevent>
-      <label for="username">Username: </label>
-      <input
-        id="username"
-        type="text"
-        v-model="username"
-      />
-    </form>
-    <br><br>
-    <button
-      @click="loginUser"
-      @keyup.enter="loginUser"
-    >Login</button> <button @click="createUser">Create Account</button>
-    <br><br>Put error response here:
+    <div class="content flex-container">
+      <div class="login-box" style="margin: 50px;">
+        You are not logged in.
+        <br><br>
+        <p>
+          To login, please type in a valid username and password.<br>
+          To create an account, please type in a new username and password.
+        </p>
+        <br>
+        <form @submit.prevent>
+          <label for="username">Username: </label>
+          <input
+            id="username"
+            type="text"
+            v-model="username"
+          />
+          <br />
+          <label for="password">Password: </label>
+          <input
+            id="password"
+            type="password"
+            v-model="password"
+          />
+        </form>
+        <br><br>
+        <button style="flex-basis: 300px; flex-shrink: false; margin: 10px;" @click="loginUser" @keyup.enter="loginUser">Login</button>
+        <button style="flex-basis: 300px; flex-shrink: false; margin: 10px;" @click="createUser">Create Account</button>
+        <br><br>
+        <p>
+          Put error response here:
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
