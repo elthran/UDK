@@ -77,3 +77,26 @@ class TestApiCountiesController:
                 }
             )
         )
+
+    def test_get_county_for_other_user(self, client, login):
+        """Return the county view you get when viewing another user."""
+
+        user1 = User.query.get(1)
+        user2 = User.query.get(2)
+        county2 = user2.county
+        login(user1.username)
+
+        data = client.get(f"/api/counties/{county2.id}").get_json()
+
+        expect(data["county"]).to(
+            have_keys(
+                {
+                    "id": 2,
+                    "land": 150,
+                    "leader": "Mechazoid",
+                    "name": "Mechland",
+                    "race": "Human",
+                    "title": "Sir",
+                }
+            )
+        )
