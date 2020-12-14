@@ -22,6 +22,10 @@ boot () {
   dc_cmd up -d "$@"
 }
 
+bash () {
+  dc_cmd exec app bash "$@"
+}
+
 test () {
    dc_cmd run --rm test pipenv run ptw -- -s tests/ "$@"
 }
