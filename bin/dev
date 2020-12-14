@@ -27,7 +27,7 @@ bash () {
 }
 
 test () {
-   dc_cmd run --rm test pipenv run ptw -- -s tests/ "$@"
+   dc_cmd run --rm test pipenv run ptw --poll "$@"
 }
 
 python () {
