@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 pytest = "*"   # Test runner
+pytest-watch = "*"  # Automated re-running test suite on file save
 expects = "*"  # Allows from readable tests, expect(something).to(have(some_property))
 faker = "*"  # Allows for easier test by generating fake data.
 ipdb = "*"  # better debugger than pdb. import ipdb;ipdb.set_trace()
