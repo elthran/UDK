@@ -1,7 +1,7 @@
 from expects import expect, have_keys, contain
 
 
-class TestApiCounties:
+class TestApiCountiesController:
     def test_get_county(self, client):
         """Start with a blank database."""
 
