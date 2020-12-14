@@ -23,7 +23,7 @@ boot () {
 }
 
 test () {
-   dc_cmd run --rm test pipenv run pytest tests/ "$@"
+   dc_cmd run --rm test pipenv run pytest -s tests/ "$@"
 }
 
 python () {

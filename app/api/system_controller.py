@@ -1,25 +1,24 @@
 from flask import jsonify
 from flask_login import current_user
 
+from app.serializers.county_serializer import CountySerializer
+from app.serializers.kingdom_serializer import KingdomSerializer
+from app.serializers.user_serializer import UserSerializer
+
 
 def get_current_user():
     if current_user.is_authenticated:
-        return jsonify(
-            user=dict(id=current_user.id,
-                      username=current_user.username,
-                      countyId=current_user.county.id)
-        )
+        return jsonify(user=UserSerializer.call(current_user))
 
-       # Temporary code due to Vue breaking sessions
-    return jsonify(
-        user=dict(username="AnonymousUserMixin")
-    )
+    # Temporary code due to Vue breaking sessions
+    return jsonify(user=dict(username="AnonymousUserMixin"))
 
 
 def get_current_county():
-    # TODO: Make this work and use the CountySerializer that you make
     if current_user.is_authenticated:
-        return jsonify(error="Not implemented.")
+        county = current_user.county
+
+        return jsonify(county=CountySerializer.call(county))
     return jsonify(error="No user logged in.")
 
 
@@ -27,18 +26,5 @@ def get_current_kingdom():
     if current_user.is_authenticated:
         kingdom = current_user.county.kingdom
 
-        kingdom = dict(
-            id=kingdom.id,
-            name=kingdom.name,
-            counties=[
-                dict(
-                    id=county.id,
-                    name=county.name,
-                    leader=county.leader,
-                    land=county.economy.land,
-                ) for county in kingdom.counties],
-        )
-        return jsonify(
-            kingdom=kingdom
-        )
+        return jsonify(kingdom=KingdomSerializer.call(kingdom))
     return jsonify(error="No user logged in.")

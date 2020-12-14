@@ -1,18 +1,4 @@
-from re import sub
-
-
-def field(name, getter: None):
-    assert getter is not None
-
-    return (name, getter)
-
-
-def fields(*names):
-    data = []
-    for name in names:
-        data.append(field(name, getter=lambda model, name=name: getattr(model, name)))
-
-    return data
+import re
 
 
 def camel_case(string):
@@ -28,37 +14,51 @@ def camel_case(string):
         camel_case("hello_world.txt_includehelp-WEBSITE") == \
             "helloWorld.TxtIncludehelpWebsite"
     """
-    string = sub(r"(_|-)+", " ", string).title().replace(" ", "")
+    string = re.sub(r"(_|-)+", " ", string).title().replace(" ", "")
     return string[0].lower() + string[1:]
 
 
 class BaseSerializer:
-    _key_transformer = camel_case
-    _fields = None
+    def __init__(self, model, view=None, key_transformer=camel_case):
+        self.model = model
+        self.current_view = view
+        self._key_transformer = key_transformer
+        self._fields = {}
+
+    def fields(self, *basic_fields, **custom_fields):
+        self._fields = {}
+        self.add_fields(*basic_fields, **custom_fields)
+
+    def add_fields(self, *basic_fields, **custom_fields):
+        for field in basic_fields:
+            self._fields[field] = getattr(self.model, field)
+
+        self._fields.update(custom_fields)
+
+    def apply_view(self, view):
+        if view is None:
+            return
+
+        getattr(self, view)(self.model)
+
+    def tranform_keys(self):
+        return {
+            self._key_transformer(key): value for (key, value) in self._fields.items()
+        }
 
     @classmethod
-    def _serialize(cls, model):
-        data = {}
+    def _serialize(cls, model, **kwargs):
+        serializer = cls(model, **kwargs)
+        serializer.apply_view(serializer.current_view)
 
-        if cls._fields is not None:
-            for field, getter in cls._fields:
-                if cls._key_transformer is not None:
-                    transformed_field = cls._key_transformer(field)
-                    data[transformed_field] = getter(model)
-                    continue
-
-                data[field] = getter(model)
-
-        return data
-
-    @classmethod
-    def call(cls, model_or_models):
         try:
-            data = []
-            for model in model_or_models:
-                data.append(cls._serialize(model))
+            return serializer.tranform_keys()
+        except ValueError:
+            return serializer._fields
 
-            return data
-
+    @classmethod
+    def call(cls, model_or_models, **kwargs):
+        try:
+            return [cls._serialize(model, **kwargs) for model in model_or_models]
         except TypeError:
-            return cls._serialize(model_or_models)
+            return cls._serialize(model_or_models, **kwargs)

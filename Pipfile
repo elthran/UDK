@@ -7,6 +7,7 @@ verify_ssl = true
 pytest = "*"   # Test runner
 expects = "*"  # Allows from readable tests, expect(something).to(have(some_property))
 faker = "*"  # Allows for easier test by generating fake data.
+ipdb = "*"  # better debugger than pdb. import ipdb;ipdb.set_trace()
 
 [packages]
 flask = "*"
