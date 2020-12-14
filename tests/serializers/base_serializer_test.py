@@ -1,6 +1,6 @@
 from expects import expect, have_keys, equal
 
-from app.serializers.base_serializer import BaseSerializer, camel_case
+from app.serializers.base_serializer import BaseSerializer
 
 
 class MockModel:
@@ -42,7 +42,7 @@ class TestBaseSerializer:
             equal([MockSerializer.call(mock_model) for mock_model in mock_models])
         )
 
-    def test_call_camel_case(self, faker):
+    def test_key_tranformer(self, faker):
         """Test that the serializer converts all field names to camel case.
 
         Args:
@@ -77,17 +77,6 @@ class TestBaseSerializer:
 
         expect(MockSerializer.call(mock_model)).to(
             have_keys(id=id_, username=username, fullname=f"{first_name} {last_name}")
-        )
-
-    def test_camel_case(self):
-        """Assert that the camel_case function converts strings to camelCase."""
-
-        assert camel_case("Hello World") == "helloWorld"
-        assert camel_case("Hello,world") == "hello,World"
-        assert camel_case("Hello_world") == "helloWorld"
-        assert (
-            camel_case("hello_world.txt_includehelp-WEBSITE")
-            == "helloWorld.TxtIncludehelpWebsite"
         )
 
     def test_view(self, faker):
