@@ -1,18 +1,45 @@
 <template>
   <div v-if="!loading">
-    <button @click="kingdomWest" :disabled="disableWest">West</button>
-    {{ selectedKingdom.name }}
-    <button @click="kingdomEast" :disabled="disableEast">East</button>
-    <br>
-    <ul>
-          <li
+    <div class="content flex-container">
+      <div class="" style="margin: 15px auto; order: 1;">
+        <button @click="kingdomWest" :disabled="disableWest">West</button>
+        <span style="margin: 0px 30px 0px 30px;">{{ selectedKingdom.name }}</span>
+        <button @click="kingdomEast" :disabled="disableEast">East</button>
+      </div>
+      <div class="" style="margin: auto; order: 2;">
+        <br>
+        <ul>
+              <li
+                v-for="county in selectedKingdom.counties"
+                :key="county.id"
+              >
+                {{ county.name }} led by <strong>{{ county.title }} {{ county.leader }}</strong>
+                with {{ county.land }} acres
+              </li>
+        </ul>
+      </div>
+      <div class="" style="margin: auto; order: 3;">
+        <table>
+          <tr>
+            <th style="border: none;">Heraldry</th>
+            <th style="border: none;">County</th>
+            <th style="border: none;">Led by</th>
+            <th style="border: none;">Acreage</th>
+            <th style="border: none;">People</th>
+          </tr>
+          <tr
             v-for="county in selectedKingdom.counties"
             :key="county.id"
           >
-            {{ county.name }} led by {{ county.title }} {{ county.leader }}
-            with {{ county.land }} acres
-          </li>
-    </ul>
+            <td><img src="" alt="heraldry?" width="100" height="100" /></td>
+            <td>{{ county.name }}</td>
+            <td>{{ county.title }} {{ county.leader }}</td>
+            <td>{{ county.land }} acres</td>
+            <td>{{ county.population }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
   </div>
 </template>
 
