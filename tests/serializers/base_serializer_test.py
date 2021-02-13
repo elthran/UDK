@@ -1,6 +1,6 @@
 from expects import expect, have_keys, equal
 
-from app.serializers.base_serializer import BaseSerializer, camel_case
+from app.serializers.base_serializer import BaseSerializer
 
 
 class MockModel:
@@ -16,6 +16,11 @@ class MockModel:
 
 class TestBaseSerializer:
     def test_call(self, faker):
+        """Test most basic serialization call.
+
+        Can the serializer extract the listed fields from the model?
+        """
+
         class MockSerializer(BaseSerializer):
             def __init__(self, model):
                 super().__init__(model)
@@ -29,6 +34,12 @@ class TestBaseSerializer:
         expect(MockSerializer.call(mock_model)).to(have_keys(id=id_, username=username))
 
     def test_call_on_array_of_models(self, faker):
+        """Test that serializer works on arrays.
+
+        Does the serializer, when given an array, operate the same as the serializer
+        when looped over each element of the array.
+        """
+
         class MockSerializer(BaseSerializer):
             def __init__(self, model):
                 super().__init__(model)
@@ -42,7 +53,7 @@ class TestBaseSerializer:
             equal([MockSerializer.call(mock_model) for mock_model in mock_models])
         )
 
-    def test_call_camel_case(self, faker):
+    def test_key_tranformer(self, faker):
         """Test that the serializer converts all field names to camel case.
 
         Args:
@@ -61,6 +72,12 @@ class TestBaseSerializer:
         expect(MockSerializer.call(mock_model)).to(have_keys(firstName=first_name))
 
     def test_custom_fields(self, faker):
+        """Test that the serializer accepts custom methods.
+
+        When you supply a keyword argument with a method call, the serializer
+        adds that field and its results to the output.
+        """
+
         class MockSerializer(BaseSerializer):
             def __init__(self, model):
                 super().__init__(model)
@@ -79,18 +96,16 @@ class TestBaseSerializer:
             have_keys(id=id_, username=username, fullname=f"{first_name} {last_name}")
         )
 
-    def test_camel_case(self):
-        """Assert that the camel_case function converts strings to camelCase."""
-
-        assert camel_case("Hello World") == "helloWorld"
-        assert camel_case("Hello,world") == "hello,World"
-        assert camel_case("Hello_world") == "helloWorld"
-        assert (
-            camel_case("hello_world.txt_includehelp-WEBSITE")
-            == "helloWorld.TxtIncludehelpWebsite"
-        )
-
     def test_view(self, faker):
+        """Test that the serializer supports custom views.
+
+        You can specify alternate views for the serializer that add
+        additional fields to the output.
+
+        e.g You will want to return a more detailed view of the current user's County
+        than for the counties of other players.
+        """
+
         class MockSerializer(BaseSerializer):
             def __init__(self, model, view=None):
                 super().__init__(model, view=view)

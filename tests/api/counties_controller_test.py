@@ -1,11 +1,17 @@
 from expects import expect, have_keys, contain
 
+from app.models.users import User
+
 
 class TestApiCountiesController:
-    def test_get_county(self, client):
-        """Start with a blank database."""
+    def test_get_county_for_currrent_user(self, client, login):
+        """Return the county view of the current user."""
 
-        data = client.get("/api/counties/1").get_json()
+        user = User.query.get(1)
+        county = user.county
+        login(user.username)
+
+        data = client.get(f"/api/counties/{county.id}").get_json()
 
         expect(data["county"]).to(
             have_keys(
@@ -68,6 +74,29 @@ class TestApiCountiesController:
                             }
                         ),
                     ),
+                }
+            )
+        )
+
+    def test_get_county_for_other_user(self, client, login):
+        """Return the county view you get when viewing another user."""
+
+        user1 = User.query.get(1)
+        user2 = User.query.get(2)
+        county2 = user2.county
+        login(user1.username)
+
+        data = client.get(f"/api/counties/{county2.id}").get_json()
+
+        expect(data["county"]).to(
+            have_keys(
+                {
+                    "id": 2,
+                    "land": 150,
+                    "leader": "Mechazoid",
+                    "name": "Mechland",
+                    "race": "Human",
+                    "title": "Sir",
                 }
             )
         )
